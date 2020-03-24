@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "Iwc844iZ5PlIlDmhPMAZMGa0wmQA1LHixGLl+pM6QWI750QMeln0aXn/IGcCcjrA2QDJQgFyqGkd7tkUl7IBjQ==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Felice\\source\\repos\\RestaurantReview\\Web\\Web.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Felice\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\3.0.3\\microsoft.netcore.app.host.win-x64.3.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}
