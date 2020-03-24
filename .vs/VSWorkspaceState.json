@@ -1,8 +1,10 @@
 {
   "ExpandedNodes": [
     "",
-    "\\Web"
+    "\\Shared",
+    "\\Web",
+    "\\Web\\Services"
   ],
-  "SelectedNode": "\\Web\\Web.csproj",
+  "SelectedNode": "\\Web\\Services\\DatabaseSeeder.cs",
   "PreviewInSolutionExplorer": false
 }
