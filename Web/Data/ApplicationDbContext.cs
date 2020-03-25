@@ -16,5 +16,6 @@ namespace Web.Data
             : base(options)
         {
         }
+        public DbSet<Shared.DBModels.Restaurant> Restaurants { get; set; }
     }
 }

@@ -12,12 +12,15 @@ namespace Shared.DBModels
 
         public DateTime Created { get; set; }
         [MaxLength(450)]
+        [Display(Name = "Created by")]
         public string CreatedById { get; set; }
         public DateTime? LastUpdate { get; set; }
         [MaxLength(450)]
+        [Display(Name = "Updated by")]
         public string LastUpdateById { get; set; }
         public DateTime? Deleted { get; set; }
         [MaxLength(450)]
+        [Display(Name = "Deleted by")]
         public string DeletedById { get; set; }
 
         public virtual ApplicationUser CreatedBy { get; set; }
