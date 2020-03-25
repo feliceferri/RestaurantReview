@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Shared.DBModels
 {
-    public class Restaurant: BaseModel
+    public class Restaurant : BaseModel
     {
         [MaxLength(50)]
         public string Name { get; set; }
@@ -22,6 +22,7 @@ namespace Shared.DBModels
         public Decimal Latitude { get; set; }
         public Decimal Longitude { get; set; }
         
+        [Display(Name = "Picture")]
         public string ImageNameWithExtension { get; set; }
         public string ImageFullURL
         {
