@@ -20,20 +20,19 @@ internal class DatabaseSeeder
 
     public static void SeedUsers(UserManager<ApplicationUser> userManager)
     {
-        if (userManager.FindByNameAsync("user1").Result == null)
+        if (userManager.FindByNameAsync("felice").Result == null)
         {
             ApplicationUser user = new ApplicationUser();
-            user.UserName = "felice";
+            user.UserName = "felice@gmail.com";
             user.Email = "felice@gmail.com";
             //user.FirstName = "Felice Ferri";
             //user.BirthDate = new DateTime(1981, 1, 1);
 
-            IdentityResult result = userManager.CreateAsync
-            (user, "felice").Result;
+            IdentityResult result = userManager.CreateAsync(user, "felice").Result;
 
             if (result.Succeeded)
             {
-                userManager.AddToRoleAsync(user,"NormalUser").Wait();
+                userManager.AddToRoleAsync(user, "Admin").Wait();
             }
         }
 
@@ -41,7 +40,7 @@ internal class DatabaseSeeder
 
     public static void SeedRoles(RoleManager<ApplicationRole> roleManager)
     {
-        if (!roleManager.RoleExistsAsync("NormalUser").Result)
+        if (!roleManager.RoleExistsAsync("Regular").Result)
         {
             ApplicationRole role = new ApplicationRole();
             role.Name = "Regular";
@@ -51,7 +50,7 @@ internal class DatabaseSeeder
         }
 
 
-        if (!roleManager.RoleExistsAsync("Administrator").Result)
+        if (!roleManager.RoleExistsAsync("Owner").Result)
         {
             ApplicationRole role = new ApplicationRole();
             role.Name = "Owner";
@@ -60,7 +59,7 @@ internal class DatabaseSeeder
             CreateAsync(role).Result;
         }
 
-        if (!roleManager.RoleExistsAsync("Administrator").Result)
+        if (!roleManager.RoleExistsAsync("Admin").Result)
         {
             ApplicationRole role = new ApplicationRole();
             role.Name = "Admin";
