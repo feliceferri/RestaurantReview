@@ -15,7 +15,7 @@ using Web.Data;
 
 namespace Web.Controllers
 {
-    
+    [Authorize]
     public class RestaurantsController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -28,6 +28,7 @@ namespace Web.Controllers
         }
 
         // GET: Restaurants
+        
         public async Task<IActionResult> Index()
         {
             var applicationDbContext = _context.Restaurants.Include(r => r.CreatedBy);
