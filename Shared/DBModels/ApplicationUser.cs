@@ -15,7 +15,11 @@ namespace Shared.DBModels
         public string FirstName { get; set; }
         [MaxLength(50)]
         public string LastName { get; set; }
+        [Display(Name = "Created")]
+        [DataType(DataType.Date)]
         public DateTime? CreatedDate { get; set; }
+        [Display(Name = "Updated")]
+        [DataType(DataType.Date)]
         public DateTime? UpdatedDate { get; set; }
         public string UpdatedBy { get; set; }
 

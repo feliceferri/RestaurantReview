@@ -25,6 +25,8 @@ namespace Web.Controllers
             _context = context;
             _env = env;
         }
+
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Index()
         {
             var users = _context.Users.Include(x=> x.UserRoles).ThenInclude(x=> x.Role);

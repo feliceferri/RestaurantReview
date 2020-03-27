@@ -11,7 +11,7 @@
     }
 </style>
 
-<h1>Restaurants</h1>
+<h1>Restaurants <span style="color:lightgray;font-size:x-large">- @User.Claims.Where(c => c.Type == System.Security.Claims.ClaimTypes.Role).Select(c => c.Value).FirstOrDefault()</span></h1>
 
 <p>
     <a asp-action="Create">Create New</a>
