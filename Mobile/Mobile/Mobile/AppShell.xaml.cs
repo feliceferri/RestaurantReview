@@ -10,6 +10,7 @@ namespace Mobile
         public AppShell()
         {
             InitializeComponent();
+             
         }
     }
 }

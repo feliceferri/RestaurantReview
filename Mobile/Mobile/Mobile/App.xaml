@@ -2,10 +2,33 @@
 <Application xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:TriggerActions="clr-namespace:Mobile.TriggerActions"
              mc:Ignorable="d"
              x:Class="Mobile.App">
     <Application.Resources>
-        
+        <ResourceDictionary>
+            <Color x:Key="BackgroundBlue">#2E46FA</Color>
+            <Color x:Key="EntryBlue">#2626DB</Color>
+
+            <Style x:Key="WhiteBackGroundOnFocus" TargetType="Entry">
+                <Style.Triggers>
+                    <Trigger TargetType="Entry" Property="IsFocused" Value="True">
+                        <Setter Property="BackgroundColor" Value="White" />
+                        <Setter Property="TextColor" Value="Black" />
+                        <Trigger.ExitActions>
+                            <TriggerActions:EntryFrameBackgroundColorAction />
+                        </Trigger.ExitActions>
+                    </Trigger>
+                    <Trigger TargetType="Entry" Property="IsFocused" Value="False">
+                        <Setter Property="BackgroundColor" Value="{StaticResource EntryBlue}" />
+                        <Setter Property="TextColor" Value="White" />
+                        <Trigger.ExitActions>
+                            <TriggerActions:EntryFrameBackgroundColorAction />
+                        </Trigger.ExitActions>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

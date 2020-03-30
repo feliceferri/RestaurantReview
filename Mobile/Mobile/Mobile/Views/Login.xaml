@@ -1,0 +1,165 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Mobile.Views.Login"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:custom="clr-namespace:Mobile.CustomControls"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:xfx="clr-namespace:Xfx;assembly=Xfx.Controls"
+    BackgroundColor="{StaticResource BackgroundBlue}"
+    mc:Ignorable="d">
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0*" />
+                <RowDefinition Height="6*" />
+                <RowDefinition Height="10*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="6*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.1*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="0.1*" />
+            </Grid.ColumnDefinitions>
+
+            <Label
+                x:Name="lblVersion"
+                Grid.RowSpan="2"
+                Grid.ColumnSpan="2"
+                FontSize="Small"
+                TextColor="LightGray" />
+
+            <Label
+                Grid.Row="1"
+                Grid.Column="1"
+                FontAttributes="Bold"
+                FontSize="60"
+                HorizontalTextAlignment="Center"
+                TextColor="White"
+                VerticalTextAlignment="Center">
+                Restaurants
+            </Label>
+
+            <Grid
+                Grid.Row="2"
+                Grid.Column="1"
+                VerticalOptions="End">
+                <StackLayout>
+                    <Frame
+                        Padding="2"
+                        BackgroundColor="{StaticResource EntryBlue}"
+                        CornerRadius="20">
+                        <StackLayout>
+                            <Entry
+                                Margin="15,15,0,15"
+                                FontSize="Medium"
+                                Keyboard="Email"
+                                Placeholder="Email"
+                                PlaceholderColor="LightGray"
+                                Style="{StaticResource WhiteBackGroundOnFocus}"
+                                Text="{Binding User.Email}"
+                                TextColor="White" />
+
+                        </StackLayout>
+                    </Frame>
+                    <Frame
+                        Margin="0,5,0,0"
+                        Padding="2"
+                        BackgroundColor="{StaticResource EntryBlue}"
+                        CornerRadius="20">
+                        <StackLayout Orientation="Horizontal" Spacing="0">
+                            <Entry
+                                Margin="15,15,0,15"
+                                FontSize="Medium"
+                                HorizontalOptions="FillAndExpand"
+                                IsPassword="True"
+                                Placeholder="Pasword"
+                                PlaceholderColor="LightGray"
+                                Style="{StaticResource WhiteBackGroundOnFocus}"
+                                Text="{Binding User.Password}"
+                                TextColor="White" />
+
+                        </StackLayout>
+                    </Frame>
+
+                </StackLayout>
+            </Grid>
+
+
+            <!--<Image BackgroundColor="Red"
+                Grid.Row="4"
+                Grid.Column="1"
+                HorizontalOptions="FillAndExpand"
+                Source="LogIn.png"
+                VerticalOptions="FillAndExpand">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="OnLogginTapped" />
+                </Image.GestureRecognizers>
+            </Image>-->
+
+            <Grid Grid.Row="4" Grid.Column="1" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="2*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="2*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Frame Grid.Row="1" Grid.Column="1" 
+                   CornerRadius="100"
+                   BackgroundColor="DarkOrange">
+                <Label TextColor="White" FontSize="Large" 
+                       HorizontalOptions="Center" VerticalOptions="Center">Login
+                </Label>
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding LoginCommand}" ></TapGestureRecognizer>
+                    </Frame.GestureRecognizers>
+            </Frame>
+            </Grid>
+
+            <StackLayout
+                Grid.Row="5"
+                Grid.Column="1"
+                HorizontalOptions="Center"
+                Orientation="Horizontal">
+                <Label
+                    Grid.Column="0"
+                    FontSize="Medium"
+                    HorizontalTextAlignment="Center"
+                    TextColor="White"
+                    VerticalTextAlignment="Center">
+                    New in Restaurants?
+                </Label>
+
+                <Label
+                    Grid.Column="1"
+                    FontSize="Medium"
+                    HorizontalOptions="Center"
+                    HorizontalTextAlignment="Center"
+                    VerticalTextAlignment="Center">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span
+                                Text="Register Now"
+                                TextColor="DarkOrange"
+                                TextDecorations="Underline">
+                                <Span.GestureRecognizers>
+                                    <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="OnRegisterNewTapped" />
+                                </Span.GestureRecognizers>
+                            </Span>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+
+            </StackLayout>
+
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

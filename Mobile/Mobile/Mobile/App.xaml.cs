@@ -3,6 +3,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using Mobile.Services;
 using Mobile.Views;
+using Mobile.Views;
 
 namespace Mobile
 {
@@ -14,7 +15,9 @@ namespace Mobile
             InitializeComponent();
 
             DependencyService.Register<MockDataStore>();
-            MainPage = new AppShell();
+            //MainPage = new AppShell();
+
+            MainPage = new Login();
         }
 
         protected override void OnStart()
