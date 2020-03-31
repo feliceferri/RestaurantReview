@@ -28,4 +28,10 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\Shared\Shared.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Views\Register.xaml.cs">
+      <DependentUpon>Registerxaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
 </Project>

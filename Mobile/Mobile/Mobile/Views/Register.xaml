@@ -1,0 +1,149 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="Mobile.Views.Register"
+             xmlns:custom="clr-namespace:Mobile"
+             BackgroundColor="{StaticResource BackgroundBlue}">
+
+    <ContentPage.Content>
+        <Grid>
+          
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0*"/>
+                <RowDefinition Height="3*"/>
+                <RowDefinition Height="10*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="4*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.1*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="0.1*"/>
+            </Grid.ColumnDefinitions>
+
+            <Label Grid.Row="1" Grid.Column="1" FontSize="60" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" 
+                   FontAttributes="Bold" TextColor="White" >Restaurants</Label>
+
+            <Grid Grid.Row="2" Grid.Column="1" VerticalOptions="End">
+            <StackLayout  >
+
+
+                    <Label TextColor="LightGray"  FontSize="20" HorizontalTextAlignment="Center"  Margin="10,0,0,50"
+                       >Personal Details</Label>
+                
+                <Frame  CornerRadius="20" Padding="2"
+                        Margin="0,10,0,0" BackgroundColor="{StaticResource EntryBlue}"  >
+                        <Entry Placeholder="First Name" Style="{StaticResource WhiteBackGroundOnFocus}"  
+                                                Text="{Binding User.Name}"
+                                                TextColor="Black" 
+                                                FontSize="Medium" PlaceholderColor="LightGray" 
+                                              Margin="15,10,0,10"/>
+
+                    
+                </Frame>
+
+               
+
+                    <Frame  CornerRadius="20" Padding="2" BackgroundColor="{StaticResource EntryBlue}"  Margin="0,5,0,0"  MinimumHeightRequest="100"  >
+                        
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+
+                            <Label x:Name="lblRegularUser" Grid.Column="0" Text="Regular User" TextColor="White"   FontSize="Medium" Margin="15,10,0,10" ></Label>
+                            <Switch x:Name="switchUserOwner" Grid.Column="1" IsToggled="{Binding User.IsOwner}" 
+                                    HorizontalOptions="Center" Toggled="switchUserOwner_Toggled"  />
+                            <Label x:Name="lblRestaurantOwner" Grid.Column="2" Text="Restaurant Owner" TextColor="Gray"  FontSize="Medium"  Margin="0,10,15,10" 
+                                   HorizontalTextAlignment="End"></Label>
+                        </Grid>
+                       
+                    </Frame>
+
+                    <Frame  CornerRadius="20" Padding="2"
+                        Margin="0,10,0,0" BackgroundColor="{StaticResource EntryBlue}"  >
+                        <Entry Placeholder="Email" Style="{StaticResource WhiteBackGroundOnFocus}"  
+                                                Text="{Binding User.Email}"
+                                                TextColor="Black" 
+                                                FontSize="Medium" PlaceholderColor="LightGray" 
+                                                Margin="15,10,0,10"/>
+
+
+                    </Frame>
+
+                
+                    <Frame  CornerRadius="20" Padding="2" BackgroundColor="{StaticResource EntryBlue}"   Margin="0,5,0,0" >
+
+                        <Entry x:Name="txtPassword" Placeholder="Password" TextColor="White" 
+                                        Style="{StaticResource WhiteBackGroundOnFocus}"  
+                                        Text="{Binding User.Password}"
+                                        IsPassword="True"
+                                        FontSize="Medium" PlaceholderColor="LightGray" 
+                                        Margin="15,10,0,10">
+
+                        </Entry>
+                    </Frame>
+
+                   
+                </StackLayout>
+
+            </Grid>
+
+
+            <Grid Grid.Row="4" Grid.Column="1" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="2*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="2*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Frame Grid.Row="1" Grid.Column="1" 
+                   CornerRadius="100"
+                   BackgroundColor="DarkOrange">
+                    <Label TextColor="White" FontSize="Large" 
+                       HorizontalOptions="Center" VerticalOptions="Center">Register
+                    </Label>
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding RegisterCommand}" ></TapGestureRecognizer>
+                    </Frame.GestureRecognizers>
+                </Frame>
+            </Grid>
+
+
+            <StackLayout Grid.Row="5" Grid.Column="1" Orientation="Horizontal" HorizontalOptions="Center">
+                <Label Grid.Column="0" FontSize="Medium" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" TextColor="White"
+                       >Already register in Restaurants?</Label>
+
+                <Label HorizontalOptions="Center"  FontSize="Medium" Grid.Column="1" VerticalTextAlignment="Center" HorizontalTextAlignment="Center">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="Log in" TextColor="DarkOrange" TextDecorations="Underline">
+                                <Span.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OnLoginTapped" NumberOfTapsRequired="1"/>
+                                </Span.GestureRecognizers>
+                            </Span>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+
+            </StackLayout>
+
+            <Frame Grid.Row="3" Grid.RowSpan="2" Grid.Column ="1"  x:Name="FrameLstCompanies" CornerRadius="20" Padding="2" BackgroundColor="{StaticResource EntryBlue}"  
+                        IsVisible="False">
+               
+            </Frame>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

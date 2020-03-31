@@ -37,7 +37,10 @@ namespace Mobile.ViewModels
                     }
                     else
                     {
-                        await Application.Current.MainPage.DisplayAlert("Error", string.Join(Environment.NewLine, res.ContentString_responJsonText), "Ok");
+                    //string error = result.Content.ReadAsStringAsync().Result;
+                    //JObject jObject = JObject.Parse(error);
+                    //await Application.Current.MainPage.DisplayAlert("Error", string.Join(Environment.NewLine, jObject[""]), "Ok");
+                    await Application.Current.MainPage.DisplayAlert("Error", string.Join(Environment.NewLine, res.ContentString_responJsonText), "Ok");
                     }
                                    
             }

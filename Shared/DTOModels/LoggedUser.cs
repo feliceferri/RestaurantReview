@@ -8,15 +8,9 @@ namespace Shared.DTOModels
     {
         public string ID { get; set; }
 
-        public string FirstName { get; set; }
+        public string Name { get; set; }
 
-        public string LastName { get; set; }
-
-        public string CompanyName { get; set; }
-
-        public Guid? CompanyID { get; set; }
-        public Guid? DepartmentId { get; set; }
-
+       
         public DateTime? Blocked { get; set; }
         public string BlockedBy { get; set; }
 

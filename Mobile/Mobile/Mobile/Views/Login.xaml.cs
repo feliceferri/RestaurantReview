@@ -30,7 +30,7 @@ namespace Mobile.Views
 
         private async void OnRegisterNewTapped(object sender, EventArgs e)
         {
-          
+            await Navigation.PushModalAsync(new Register());
         }
     }
 }

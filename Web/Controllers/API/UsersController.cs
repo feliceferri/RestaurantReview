@@ -42,8 +42,7 @@ namespace Web.Controllers.WebApi
             {
                 UserName = model.Email,
                 Email = model.Email,
-                FirstName = model.FirstName,
-                LastName = model.LastName,
+                Name = model.Name,
                 EmailConfirmed = true,
             };
 
@@ -60,7 +59,7 @@ namespace Web.Controllers.WebApi
                     await _userManager.AddToRoleAsync(User, role);
                 }
                 
-                return Ok(new LoggedUser() { ID = User.Id, FirstName = User.FirstName, LastName = User.LastName, 
+                return Ok(new LoggedUser() { ID = User.Id, Name = User.Name,
                                Roles = await _userManager.GetRolesAsync(User)
                 }); ; ;
             }
@@ -90,8 +89,7 @@ namespace Web.Controllers.WebApi
 
                     var newUser = new LoggedUser() {
                         ID = user.Id,
-                        FirstName = user.FirstName, 
-                        LastName = user.LastName,
+                        Name = user.Name
                     };
 
                     newUser.Roles = (await _userManager.GetRolesAsync(user)); 
@@ -155,8 +153,7 @@ namespace Web.Controllers.WebApi
 
                 existingUser.UpdatedDate = DateTime.Now;
                 existingUser.UpdatedBy = UserId;
-                existingUser.FirstName = model.FirstName;
-                existingUser.LastName = model.LastName;
+                existingUser.Name = model.Name;
                 existingUser.Blocked = model.Blocked;
                 existingUser.BlockedBy = model.BlockedBy;
                                 

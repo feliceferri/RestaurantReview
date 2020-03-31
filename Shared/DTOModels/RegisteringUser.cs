@@ -12,12 +12,9 @@ namespace Shared.DTOModels
         public string Email { get; set; }
         public string Password { get; set; }
 
-        public string FirstName { get; set; }
+        public string  Name { get; set; }
 
-        public string LastName { get; set; }
 
         public IEnumerable<string> Roles { get; set; }
-        public Guid? CompanyID { get; set; }
-        public Guid? DepartmentID { get; set; }
     }
 }
