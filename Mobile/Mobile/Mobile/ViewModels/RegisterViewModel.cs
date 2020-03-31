@@ -43,7 +43,9 @@ namespace Mobile.ViewModels
                     var res = await Services.APIComm.CallPostAsync(User, "Users/Register", true);
                     if (res.Success == true)
                     {
+                        GlobalVariables.LoggedUser = JsonConvert.DeserializeObject<LoggedUser>(res.ContentString_responJsonText);
 
+                        Application.Current.MainPage = new AppShell();
                     }
                     else
                     {
