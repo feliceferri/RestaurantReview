@@ -10,7 +10,8 @@
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="0.5*"></RowDefinition>
-                <RowDefinition Height="10*"></RowDefinition>
+                <RowDefinition Height="0.8*"></RowDefinition>
+                <RowDefinition Height="9*"></RowDefinition>
                 <RowDefinition Height="0.5"></RowDefinition>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
@@ -19,50 +20,80 @@
                 <ColumnDefinition Width="0.5"></ColumnDefinition>
             </Grid.ColumnDefinitions>
 
-            <StackLayout Grid.Row="1" Grid.Column="1"  >
-            <Grid >
+            
+            <Grid Grid.Row="1" Grid.Column="1" >
                 <Label FontSize="40" HorizontalOptions="Start" 
                        Text="{Binding Title}" 
                    FontAttributes="Bold" TextColor="White" ></Label>
                     <Button Command="{Binding AddRestaurantCommand}" Text="Add +" HorizontalOptions="End" 
-                            BackgroundColor="DarkOrange" TextColor="White"
-                            CornerRadius="50"></Button>
+                            BackgroundColor="DarkOrange" TextColor="White" FontAttributes="Bold"
+                            CornerRadius="50" Margin="0,5,0,0"></Button>
                 </Grid>
 
-
-                <Frame IsVisible="{Binding ShowEditingRestaurant}" 
-                       Margin="0,15,0,0" BackgroundColor="LightGray" CornerRadius="15" >
+                <ScrollView Grid.Row="2" Grid.Column="1">
                     <StackLayout>
-                    
-                    <Grid >
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"></ColumnDefinition>
-                        <ColumnDefinition Width="2*"></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
-
+                    <Frame IsVisible="{Binding ShowEditingRestaurant}" 
+                       Margin="0,15,0,0" BackgroundColor="LightGray" CornerRadius="15" >
                         <StackLayout>
-                            <Frame CornerRadius="5" IsClippedToBounds="True" Margin="5">
-                                <Image HeightRequest="70"></Image>
-                            </Frame>
-                            <Button Text="Load Pic" FontSize="Small"></Button>
-                        </StackLayout>
-                    
-                    <StackLayout Grid.Column="1">
-                            <Entry Placeholder="Restaurant Name" Text="{Binding Restaurant.Name}"></Entry>
-                            <Editor Placeholder="Details"  Text="{Binding Restaurant.Description}"></Editor>
-                            <Entry Placeholder="Address"  Text="{Binding Restaurant.Address}"></Entry>
-                            <Entry Placeholder="Phone"  Text="{Binding Restaurant.PhoneNumber}"></Entry>
-                     </StackLayout>
 
-                     </Grid>
-                    <Button  Text="Save" Command="{Binding SaveNewRestaurantCommand}" 
+                            <Grid >
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                    <ColumnDefinition Width="2*"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+
+                                <StackLayout>
+                                    <Frame CornerRadius="5" IsClippedToBounds="True" Margin="5">
+                                        <Image HeightRequest="70"></Image>
+                                    </Frame>
+                                    <Button Text="Load Pic" FontSize="Small"></Button>
+                                </StackLayout>
+
+                                <StackLayout Grid.Column="1">
+                                    <Entry Placeholder="Restaurant Name" Text="{Binding Restaurant.Name}"></Entry>
+                                    <Editor Placeholder="Details"  Text="{Binding Restaurant.Description}"></Editor>
+                                    <Entry Placeholder="Address"  Text="{Binding Restaurant.Address}"></Entry>
+                                    <Entry Placeholder="Phone"  Text="{Binding Restaurant.PhoneNumber}"></Entry>
+                                </StackLayout>
+
+                            </Grid>
+                            <Button  Text="Save" Command="{Binding SaveNewRestaurantCommand}" 
                              BackgroundColor="DarkOrange" TextColor="White"
                              CornerRadius="50" Margin="50,10,50,0"></Button>
-                   
-                </StackLayout>
-                </Frame>
 
-            </StackLayout>
+                        </StackLayout>
+                    </Frame>
+
+                    <CollectionView  Margin="0,15,0,0"
+                    ItemsSource="{Binding ListRestaurants}"
+                    SelectionMode="Single">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid >
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"></ColumnDefinition>
+                                        <ColumnDefinition Width="3*"></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+
+                                    <StackLayout>
+                                        <Frame CornerRadius="5" IsClippedToBounds="True" Margin="5">
+                                            <Image HeightRequest="40"></Image>
+                                        </Frame>
+                                     </StackLayout>
+
+                                    <StackLayout Grid.Column="1" VerticalOptions="CenterAndExpand">
+                                        <Label Text="{Binding Name}" TextColor="White" FontAttributes="Bold" FontSize="Large"></Label>
+                                        <Label Text="{Binding Description}" TextColor="White"></Label>
+                                     </StackLayout>
+
+                                </Grid>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                    </StackLayout>
+                </ScrollView>
+            
+            
         </Grid>
     </ContentPage.Content>
 </ContentPage>

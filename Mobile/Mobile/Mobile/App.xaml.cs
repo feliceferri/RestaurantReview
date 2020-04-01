@@ -16,7 +16,9 @@ namespace Mobile
             InitializeComponent();
 
 
-            GlobalVariables.LoggedUser = new Shared.DTOModels.LoggedUser() { Name = "Franco Ferri", Roles = new List<string>() { "Owner" } };
+            GlobalVariables.LoggedUser = new Shared.DTOModels.LoggedUser() { ID = "37187e64-47cb-4350-94a4-4886c897d82a",
+                                                                            Name = "Franco Ferri", 
+                                                                            Roles = new List<string>() { "Owner" } };
 
             MainPage = new AppShell();
 
