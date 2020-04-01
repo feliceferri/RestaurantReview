@@ -10,7 +10,8 @@ namespace Mobile
         public AppShell()
         {
             InitializeComponent();
-             
+
+            Routing.RegisterRoute("Main", typeof(Views.Main));
         }
     }
 }

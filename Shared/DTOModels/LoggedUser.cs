@@ -15,7 +15,7 @@ namespace Shared.DTOModels
         public string BlockedBy { get; set; }
 
         //public DBModels.ApplicationUserRole UserRoles { get; set; }
-        public virtual IEnumerable<string> Roles { get; set; }
+        public virtual IList<string> Roles { get; set; }
 
     }
 }

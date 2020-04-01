@@ -4,6 +4,7 @@ using Xamarin.Forms.Xaml;
 using Mobile.Services;
 using Mobile.Views;
 using Mobile.Views;
+using System.Collections.Generic;
 
 namespace Mobile
 {
@@ -14,10 +15,12 @@ namespace Mobile
         {
             InitializeComponent();
 
-           
-            //MainPage = new AppShell();
 
-            MainPage = new Login();
+            GlobalVariables.LoggedUser = new Shared.DTOModels.LoggedUser() { Name = "Franco Ferri", Roles = new List<string>() { "Owner" } };
+
+            MainPage = new AppShell();
+
+            //MainPage = new Login();
         }
 
         protected override void OnStart()

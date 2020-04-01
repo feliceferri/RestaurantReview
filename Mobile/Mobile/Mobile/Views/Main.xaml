@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="Mobile.Views.Main"
+             BackgroundColor="{StaticResource BackgroundBlue}">
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.5*"></RowDefinition>
+                <RowDefinition Height="10*"></RowDefinition>
+                <RowDefinition Height="0.5"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.5*"></ColumnDefinition>
+                <ColumnDefinition Width="10*"></ColumnDefinition>
+                <ColumnDefinition Width="0.5"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <StackLayout Grid.Row="1" Grid.Column="1"  >
+            <Grid >
+                <Label FontSize="40" HorizontalOptions="Start" 
+                       Text="{Binding Title}" 
+                   FontAttributes="Bold" TextColor="White" ></Label>
+                    <Button Command="{Binding AddRestaurantCommand}" Text="Add +" HorizontalOptions="End" 
+                            BackgroundColor="DarkOrange" TextColor="White"
+                            CornerRadius="50"></Button>
+                </Grid>
+
+
+                <Frame IsVisible="{Binding ShowEditingRestaurant}" 
+                       Margin="0,15,0,0" BackgroundColor="LightGray" CornerRadius="15" >
+                    <StackLayout>
+                    
+                    <Grid >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="2*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+
+                        <StackLayout>
+                            <Frame CornerRadius="5" IsClippedToBounds="True" Margin="5">
+                                <Image HeightRequest="70"></Image>
+                            </Frame>
+                            <Button Text="Load Pic" FontSize="Small"></Button>
+                        </StackLayout>
+                    
+                    <StackLayout Grid.Column="1">
+                            <Entry Placeholder="Restaurant Name" Text="{Binding Restaurant.Name}"></Entry>
+                            <Editor Placeholder="Details"  Text="{Binding Restaurant.Description}"></Editor>
+                            <Entry Placeholder="Address"  Text="{Binding Restaurant.Address}"></Entry>
+                            <Entry Placeholder="Phone"  Text="{Binding Restaurant.PhoneNumber}"></Entry>
+                     </StackLayout>
+
+                     </Grid>
+                    <Button  Text="Save" Command="{Binding SaveNewRestaurantCommand}" 
+                             BackgroundColor="DarkOrange" TextColor="White"
+                             CornerRadius="50" Margin="50,10,50,0"></Button>
+                   
+                </StackLayout>
+                </Frame>
+
+            </StackLayout>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
