@@ -34,8 +34,8 @@
         <Tab Title="Main" Icon="tab_feed.png">
             <ShellContent ContentTemplate="{DataTemplate local:Main}" />
         </Tab>
-        <Tab Title="About" Icon="tab_about.png">
-            <!--<ShellContent ContentTemplate="{DataTemplate local:AboutPage}" />-->
+        <Tab Title="Restaurant" Icon="tab_about.png">
+            <ShellContent ContentTemplate="{DataTemplate local:Restaurant}" />
         </Tab>
     </TabBar>
 

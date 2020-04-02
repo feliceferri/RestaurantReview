@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Shared.DBModels
 {
-    public class Reviews: BaseModel
+    public class Review: BaseModel
     {
         public int Rating { get; set; }
         public DateTime VisitDate { get; set; }
@@ -15,5 +15,8 @@ namespace Shared.DBModels
 
         [DataType(DataType.MultilineText)]
         public string ReplyByTheOwner { get; set; }
+
+        public Guid RestaurantId {get;set;}
+        public Restaurant Restaurant {get;set;}
     }
 }

@@ -16,7 +16,9 @@ namespace Web.Data
             : base(options)
         {
         }
+        
         public DbSet<Shared.DBModels.Restaurant> Restaurants { get; set; }
+        public DbSet<Shared.DBModels.Restaurant> Reviews { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder builder)
@@ -37,6 +39,13 @@ namespace Web.Data
                     .HasForeignKey(ur => ur.UserId)
                     .IsRequired();
             });
+
+            builder.Entity<Review>()
+            .HasOne(p => p.Restaurant)
+            .WithMany(b => b.Reviews)
+            .HasForeignKey(d => d.RestaurantId)
+            .OnDelete(DeleteBehavior.Cascade)
+            .HasConstraintName("FK_Restaurant_Reviews");
 
         }
     }

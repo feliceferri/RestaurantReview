@@ -21,6 +21,8 @@ namespace Shared.DBModels
         public string OpeningHours { get; set; }
         public Decimal Latitude { get; set; }
         public Decimal Longitude { get; set; }
+
+        public virtual ICollection<Review> Reviews {get;set;}
         
         [Display(Name = "Picture")]
         public string ImageNameWithExtension { get; set; }

@@ -5,6 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="Mobile.Views.Main"
+             Shell.TabBarIsVisible="False"
              BackgroundColor="{StaticResource BackgroundBlue}">
     <ContentPage.Content>
         <Grid>
@@ -66,6 +67,7 @@
 
                     <CollectionView  Margin="0,15,0,0"
                     ItemsSource="{Binding ListRestaurants}"
+                    SelectionChanged="CollectionView_SelectionChanged"
                     SelectionMode="Single">
                         <CollectionView.ItemTemplate>
                             <DataTemplate>

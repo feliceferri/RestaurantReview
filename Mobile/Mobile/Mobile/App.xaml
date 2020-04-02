@@ -8,7 +8,11 @@
              x:Class="Mobile.App">
     <Application.Resources>
         <ResourceDictionary>
+            
             <Color x:Key="BackgroundBlue">#2E46FA</Color>
+            <Color x:Key="BackgroundBlueLight">#E1EBF7</Color>
+            <Color x:Key="BackgroundTextBlueDark">Navy</Color>
+            <Color x:Key="BackgroundText">#313146</Color>
             <Color x:Key="EntryBlue">#2626DB</Color>
 
             <Style x:Key="WhiteBackGroundOnFocus" TargetType="Entry">

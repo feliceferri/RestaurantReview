@@ -12,6 +12,7 @@ namespace Mobile
             InitializeComponent();
 
             Routing.RegisterRoute("Main", typeof(Views.Main));
+            Routing.RegisterRoute("Restaurant", typeof(Views.Restaurant));
         }
     }
 }

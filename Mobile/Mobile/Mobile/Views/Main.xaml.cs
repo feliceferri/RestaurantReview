@@ -21,5 +21,12 @@ namespace Mobile.Views
             viewModel = new MainViewModel();
             BindingContext = viewModel;
         }
+
+        private async void CollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            
+            GlobalVariables.SelectedRestaurantId = (e.CurrentSelection[0] as Shared.DBModels.Restaurant).Id;
+            await Xamarin.Forms.Shell.Current.GoToAsync("Restaurant");
+        }
     }
 }

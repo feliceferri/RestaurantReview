@@ -1,0 +1,174 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    x:Class="Mobile.CustomControls.RatingBar"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <ContentView.Content>
+
+
+
+        <Grid>
+
+            <!--<Grid.RowDefinitions>
+                <RowDefinition Height="3*"/>
+            </Grid.RowDefinitions>-->
+
+            <!--<Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.1*"/>
+                <ColumnDefinition Width="0.1*"/>
+                <ColumnDefinition Width="0.1*"/>
+                <ColumnDefinition Width="0.1*"/>
+                <ColumnDefinition Width="0.1*"/>
+            </Grid.ColumnDefinitions>-->
+
+
+            <!--  Estrellas en Orange  -->
+
+            <StackLayout
+                Grid.Row="0"
+                HorizontalOptions="Center"
+                Orientation="Horizontal">
+
+                <Image
+                    x:Name="OrangeStar1"
+                    AutomationId="0"
+                    IsVisible="False"
+                    Source="starOrange.png">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer
+                            CommandParameter="1"
+                            NumberOfTapsRequired="1"
+                            Tapped="OnOrangeStarTapped" />
+                    </Image.GestureRecognizers>
+                </Image>
+                <Image
+                    x:Name="OrangeStar2"
+                    IsVisible="False"
+                    Source="starOrange.png">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer
+                            CommandParameter="2"
+                            NumberOfTapsRequired="1"
+                            Tapped="OnOrangeStarTapped" />
+                    </Image.GestureRecognizers>
+                </Image>
+                <Image
+                    x:Name="OrangeStar3"
+                    IsVisible="False"
+                    Source="starOrange.png">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer
+                            CommandParameter="3"
+                            NumberOfTapsRequired="1"
+                            Tapped="OnOrangeStarTapped" />
+                    </Image.GestureRecognizers>
+                </Image>
+                <Image
+                    x:Name="OrangeStar4"
+                    IsVisible="False"
+                    Source="starOrange.png">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer
+                            CommandParameter="4"
+                            NumberOfTapsRequired="1"
+                            Tapped="OnOrangeStarTapped" />
+                    </Image.GestureRecognizers>
+                </Image>
+
+                <Image
+                    x:Name="OrangeStar5"
+                    IsVisible="false"
+                    Source="starOrange.png">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer
+                            CommandParameter="5"
+                            NumberOfTapsRequired="1"
+                            Tapped="OnOrangeStarTapped" />
+                    </Image.GestureRecognizers>
+                </Image>
+
+
+                <!--  Estrellas Grey  -->
+                <Image
+                    x:Name="stargray1"
+                    IsVisible="True"
+                    Source="stargray.png">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer
+                            CommandParameter="1"
+                            NumberOfTapsRequired="1"
+                            Tapped="OnGreyTapped" />
+                    </Image.GestureRecognizers>
+                </Image>
+                <Image
+                    x:Name="stargray2"
+                    IsVisible="True"
+                    Source="stargray.png">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer
+                            CommandParameter="2"
+                            NumberOfTapsRequired="1"
+                            Tapped="OnGreyTapped" />
+                    </Image.GestureRecognizers>
+                </Image>
+                <Image
+                    x:Name="stargray3"
+                    IsVisible="True"
+                    Source="stargray.png">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer
+                            CommandParameter="3"
+                            NumberOfTapsRequired="1"
+                            Tapped="OnGreyTapped" />
+                    </Image.GestureRecognizers>
+                </Image>
+                <Image
+                    x:Name="stargray4"
+                    IsVisible="True"
+                    Source="stargray.png">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer
+                            CommandParameter="4"
+                            NumberOfTapsRequired="1"
+                            Tapped="OnGreyTapped" />
+                    </Image.GestureRecognizers>
+                </Image>
+
+
+
+                <Image
+                    x:Name="stargray5"
+                    IsVisible="True"
+                    Source="stargray.png">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer
+                            CommandParameter="5"
+                            NumberOfTapsRequired="1"
+                            Tapped="OnGreyTapped" />
+                    </Image.GestureRecognizers>
+                </Image>
+
+
+                <!--  Star Test  -->
+                <!--<Image
+                    x:Name="stargray6"
+                    IsVisible="False"
+                    Source="stargray.png">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer
+                            CommandParameter="6"
+                            NumberOfTapsRequired="1"
+                            Tapped="Ontest" />
+                    </Image.GestureRecognizers>
+                </Image>-->
+
+
+            </StackLayout>
+
+
+        </Grid>
+    </ContentView.Content>
+</ContentView>

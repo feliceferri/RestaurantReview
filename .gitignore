@@ -340,3 +340,5 @@ ASALocalRun/
 
 # BeatPulse healthcheck temp database
 healthchecksdb
+/Web/Data/Migrations/20200402001425_Reviews.Designer.cs
+/Web/Data/Migrations/20200402001425_Reviews.cs

@@ -72,6 +72,31 @@ namespace Web.Controllers.API
             }
         }
 
+        [HttpGet]
+        [Route("ByRestaurantId/{RestaurantId}/IncludeReviews")]
+        public async Task<ActionResult<List<Restaurant>>> ByRestaurantId(Guid RestaurantId)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            try
+            {
+                
+                var res = await _ApplicationDbContext.Restaurants.Where(x => x.Id == RestaurantId)
+                                               .Include(x=> x.Reviews)
+                                               .FirstOrDefaultAsync();
+               
+                return Ok(res);
+            }
+            catch(Exception ex)
+            {
+                _logger.LogError(ex, nameof(ByUserId));
+                throw;
+            }
+        }
+
         [HttpPost]
         [Route("New")]
         public async Task<ActionResult<Restaurant>> New(Shared.DTOModels.NewRestaurant model)

@@ -1,9 +1,16 @@
 {
   "ExpandedNodes": [
     "",
+    "\\Mobile\\Mobile",
+    "\\Mobile\\Mobile\\Mobile",
+    "\\Mobile\\Mobile\\Mobile\\Services",
     "\\Shared",
-    "\\Web",
+    "\\Shared\\DBModels",
+    "\\Web\\Controllers",
+    "\\Web\\Controllers\\API",
+    "\\Web\\Data",
     "\\Web\\Services"
   ],
+  "SelectedNode": "\\Web",
   "PreviewInSolutionExplorer": false
 }

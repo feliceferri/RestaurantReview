@@ -25,5 +25,7 @@ namespace Mobile
 
 
         public static LoggedUser LoggedUser = null;
+
+        public static Guid SelectedRestaurantId { get; set; }
     }
 }
