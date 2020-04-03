@@ -12,7 +12,8 @@ namespace Mobile.ViewModels
     public class RestaurantViewModel : BaseViewModel
     {
 
-        public Restaurant Restaurant { get; set; } 
+        public Restaurant Restaurant { get; set; }
+        public Review MyReview { get; set; }
 
         public RestaurantViewModel(Guid RestaurantId)
         {
