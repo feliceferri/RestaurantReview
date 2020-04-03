@@ -18,7 +18,7 @@ namespace Web.Data
         }
         
         public DbSet<Shared.DBModels.Restaurant> Restaurants { get; set; }
-        public DbSet<Shared.DBModels.Restaurant> Reviews { get; set; }
+        public DbSet<Shared.DBModels.Review> Reviews { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder builder)

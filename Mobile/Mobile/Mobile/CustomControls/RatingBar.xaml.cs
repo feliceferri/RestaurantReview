@@ -14,7 +14,7 @@ namespace Mobile.CustomControls
     public partial class RatingBar : ContentView
     {
 
-        public static BindableProperty RatingProperty = BindableProperty.Create("Rating", typeof(int), typeof(RatingBar), 0, propertyChanged: OnRatingChanged);
+        public static BindableProperty RatingProperty = BindableProperty.Create("Rating", typeof(int?), typeof(RatingBar), 0, propertyChanged: OnRatingChanged,defaultBindingMode: BindingMode.TwoWay);
         public static BindableProperty IsReadOnlyProperty = BindableProperty.Create("IsReadOnly", typeof(bool), typeof(RatingBar), defaultValue: false, propertyChanged: OnIsReadOnlyChanged);
 
         public event EventHandler<int> RatingChanged;
@@ -40,7 +40,7 @@ namespace Mobile.CustomControls
             }
         }
 
-        public decimal? Rating
+        public int? Rating
         {
             get { return (int)GetValue(RatingProperty); }
             set

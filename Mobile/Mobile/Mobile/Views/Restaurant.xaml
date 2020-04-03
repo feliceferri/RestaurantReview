@@ -102,7 +102,7 @@
                     </StackLayout>
                 </Frame>
 
-                <Frame Margin="0,15,0,0" >
+                <Frame IsVisible="{Binding FrameCreateReview_Isvisible}"  Margin="0,15,0,0" >
                     <StackLayout>
                         <Grid>
                             <StackLayout Orientation="Horizontal" >
@@ -117,7 +117,7 @@
                             </StackLayout>
                         </Grid>
                         <Editor Placeholder="Details"  Text="{Binding MyReview.Comment}" HeightRequest="80" FontSize="Medium"></Editor>
-                        <Button  Text="Save" Command="{Binding SaveNewRestaurantCommand}" 
+                        <Button  Text="Save" Command="{Binding SaveReviewCommand}" 
                              BackgroundColor="DarkOrange" TextColor="White"
                              CornerRadius="50" Margin="100,10,100,0"></Button>
 
