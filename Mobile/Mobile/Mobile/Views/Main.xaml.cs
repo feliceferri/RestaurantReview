@@ -24,9 +24,24 @@ namespace Mobile.Views
 
         private async void CollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            
-            GlobalVariables.SelectedRestaurantId = (e.CurrentSelection[0] as Shared.DBModels.Restaurant).Id;
-            await Xamarin.Forms.Shell.Current.GoToAsync("Restaurant");
+
+            //if(e.CurrentSelection?[0] == null)
+            //{
+            //    return;
+            //}
+
+            try
+            {
+                GlobalVariables.SelectedRestaurantId = (e.CurrentSelection[0] as Shared.DBModels.Restaurant).Id;
+                //this.ListRestaurants.SelectedItem = null;
+                ((CollectionView)sender).SelectedItem = null;
+                await GlobalVariables.NavigateToAsync("Restaurant");
+                NavigationBar.CurrentItem = 
+            }
+            catch (Exception ex)
+            {
+
+            }
         }
     }
 }

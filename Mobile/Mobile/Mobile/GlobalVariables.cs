@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace Mobile
 {
@@ -27,5 +29,38 @@ namespace Mobile
         public static LoggedUser LoggedUser = null;
 
         public static Guid SelectedRestaurantId { get; set; }
+
+        public static Xamarin.Forms.TabBar NavigationBar;
+
+
+        public static async Task NavigateToAsync(string TabBarItemName)
+        {
+            //NavigationBar.CurrentItem = (from p in NavigationBar.Items
+            //                             where p.Title == TabItemName
+            //                             select p).FirstOrDefault();
+
+            NavigationBar.CurrentItem = TabBarItemNameToTabBar(TabBarItemName);
+
+            await Xamarin.Forms.Shell.Current.GoToAsync(TabBarItemName);
+
+        }
+
+       
+        internal static ShellSection TabBarItemNameToTabBar(string TabBarItemName)
+        {
+            switch (TabBarItemName)
+            {
+                case "Main":
+                return NavigationBar.Items[0];
+                    break;
+                case "Restaurant":
+                    return NavigationBar.Items[1];
+                    break;
+                default:
+                    return null;
+                    break;
+            }
+
+        }
     }
 }

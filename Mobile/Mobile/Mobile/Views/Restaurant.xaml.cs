@@ -22,7 +22,7 @@ namespace Mobile.Views
             {
                 Task.Run(async () =>
                 {
-                    await Xamarin.Forms.Shell.Current.GoToAsync("Main");
+                    await GlobalVariables.NavigateToAsync("Main");
                 });
             }
             else

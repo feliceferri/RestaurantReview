@@ -65,10 +65,11 @@
                         </StackLayout>
                     </Frame>
 
-                    <CollectionView  Margin="0,15,0,0"
-                    ItemsSource="{Binding ListRestaurants}"
-                    SelectionChanged="CollectionView_SelectionChanged"
-                    SelectionMode="Single">
+                    <CollectionView  x:Name="ListRestaurants"
+                         Margin="0,15,0,0"
+                         ItemsSource="{Binding ListRestaurants}"
+                         SelectionChanged="CollectionView_SelectionChanged"
+                        SelectionMode="Single">
                         <CollectionView.ItemTemplate>
                             <DataTemplate>
                                 <Grid >

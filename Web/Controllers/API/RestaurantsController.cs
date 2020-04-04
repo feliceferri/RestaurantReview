@@ -88,6 +88,13 @@ namespace Web.Controllers.API
                                                .Include(x=> x.Reviews)
                                                .FirstOrDefaultAsync();
                
+                if(res != null)
+                {
+                    res.Rating = await (from p in _ApplicationDbContext.Reviews
+                                        where p.RestaurantId == RestaurantId
+                                        select p).AverageAsync(x => x.Rating);
+                }
+
                 return Ok(res);
             }
             catch(Exception ex)

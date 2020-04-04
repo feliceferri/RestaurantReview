@@ -38,7 +38,8 @@
                                         Source="{Binding Restaurant.ImageFullURL}"
                                         VerticalOptions="FillAndExpand" />
 
-                                    <custom:RatingBar BackgroundColor="White" Opacity="0.5" VerticalOptions="EndAndExpand" Padding="4"
+                                        
+                                    <custom:RatingBar BackgroundColor="White" Opacity="0.8" VerticalOptions="EndAndExpand" Padding="4"
                                         x:Name="RatingControl"
                                         Grid.Row="0"
                                         Grid.Column="0"
@@ -131,9 +132,9 @@
                                     x:Name="ListReviews"
                                     Margin="30,5,30,0"
                                     SelectionMode="Single">
-                                <CollectionView.ItemTemplate>
-                                    <DataTemplate>
-                                        <StackLayout
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout
                                                 x:Name="ContainerElement"
                                                 Margin="0,0,0,10"
                                                 Orientation="Vertical">
@@ -147,9 +148,9 @@
                                                         TextColor="Black" />
 
 
-                                               
 
-                                                <custom:RatingBar
+
+                                    <custom:RatingBar
                                                         HeightRequest="15"
                                                         HorizontalOptions="End"
                                                         IsReadOnly="True"
@@ -157,23 +158,19 @@
                                                         VerticalOptions="Center"
                                                         WidthRequest="100" />
 
-                                              
-                                            </Grid>
 
-                                <Label
-                                                        Grid.Row="2"
-                                                        Grid.Column="3"
-                                                        Grid.ColumnSpan="2"
-                                                        Text="{Binding Comment}"
-                                                        VerticalTextAlignment="Center" />
-                                
-                                 <Label BackgroundColor="Gray" HeightRequest="1" Margin="0,4,0,4"></Label>
+                                </Grid>
+
+                                <Label Text="{Binding Comment}" VerticalTextAlignment="Center" FontSize="Medium" Margin="0,0,50,0" />
+                                <Label Text="{Binding ReplyByTheOwner}" HorizontalTextAlignment="End" FontSize="Small" TextColor="DarkOrange" Margin="50,0,0,0" />
+
+                                <Label BackgroundColor="Gray" HeightRequest="1" Margin="0,4,0,4"></Label>
 
                             </StackLayout>
-                                    </DataTemplate>
-                                </CollectionView.ItemTemplate>
-                            </CollectionView>
-               
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>

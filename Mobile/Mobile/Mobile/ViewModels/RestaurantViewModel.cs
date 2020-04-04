@@ -17,7 +17,11 @@ namespace Mobile.ViewModels
         public Restaurant Restaurant { get; set; }
         public Review MyReview { get; set; } =  new Review();
 
-        public bool FrameCreateReview_Isvisible { get; set; }
+        bool _frameCreateReview_IsVisible;
+        public bool FrameCreateReview_Isvisible { get { return _frameCreateReview_IsVisible; }
+            set { _frameCreateReview_IsVisible = value;
+                this.OnPropertyChanged(nameof(FrameCreateReview_Isvisible));
+            } }
 
         public Command SaveReviewCommand { get; set; }
         public RestaurantViewModel(Guid RestaurantId)
@@ -28,31 +32,39 @@ namespace Mobile.ViewModels
 
             Task.Run(async () =>
             {
-                var res = await Services.APIComm.CallGetAsync($"Restaurants/ByRestaurantId/{RestaurantId}/IncludeReviews");
-                if (res.Success == true)
-                {
-                    this.Restaurant = Newtonsoft.Json.JsonConvert.DeserializeObject<Restaurant>(res.ContentString_responJsonText);
-                    this.OnPropertyChanged(nameof(Restaurant));
+                await LoadData(RestaurantId);
+            });
+        }
 
-                    if (this.Restaurant.Reviews != null && this.Restaurant.Reviews.Count > 0)
-                    {
-                        this.MyReview = (from p in this.Restaurant.Reviews
-                                         where p.CreatedById == GlobalVariables.LoggedUser.ID
-                                         select p).FirstOrDefault();
-                        if(MyReview == null)
-                        {
-                            FrameCreateReview_Isvisible = true;
-                            this.OnPropertyChanged(nameof(FrameCreateReview_Isvisible));
-                        }
-                    }
-                    else
+        private async Task LoadData(Guid RestaurantId)
+        {
+            var res = await Services.APIComm.CallGetAsync($"Restaurants/ByRestaurantId/{RestaurantId}/IncludeReviews");
+            if (res.Success == true)
+            {
+
+                this.Restaurant = Newtonsoft.Json.JsonConvert.DeserializeObject<Restaurant>(res.ContentString_responJsonText);
+                this.OnPropertyChanged(nameof(Restaurant));
+
+                if (this.Restaurant.CreatedById == GlobalVariables.LoggedUser.ID)
+                {
+                    FrameCreateReview_Isvisible = false;
+                }
+                else if (this.Restaurant.Reviews != null && this.Restaurant.Reviews.Count > 0)
+                {
+                    Review OwnReview = (from p in this.Restaurant.Reviews
+                                        where p.CreatedById == GlobalVariables.LoggedUser.ID
+                                        select p).FirstOrDefault();
+                    if (OwnReview == null)
                     {
                         FrameCreateReview_Isvisible = true;
-                        this.OnPropertyChanged(nameof(FrameCreateReview_Isvisible));
                     }
-                  
                 }
-            });
+                else
+                {
+                    FrameCreateReview_Isvisible = true;
+                }
+
+            }
         }
 
         async Task ExecuteSaveReviewCommand()
@@ -77,7 +89,7 @@ namespace Mobile.ViewModels
                     if (res.Success == true)
                     {
                         FrameCreateReview_Isvisible = false;
-                        this.OnPropertyChanged(nameof(FrameCreateReview_Isvisible));
+                        await LoadData(Restaurant.Id);
                     }
                     else
                     {

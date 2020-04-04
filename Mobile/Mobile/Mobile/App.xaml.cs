@@ -20,9 +20,12 @@ namespace Mobile
                                                                             Name = "Franco Ferri", 
                                                                             Roles = new List<string>() { "Owner" } };
 
-            MainPage = new AppShell();
+            
+            //var ShellInstance = new AppShell();
+            //GlobalVariables.NavigationBar = ShellInstance.Items[0] as TabBar;
+            //MainPage = ShellInstance;
 
-            //MainPage = new Login();
+            MainPage = new Login();
         }
 
         protected override void OnStart()

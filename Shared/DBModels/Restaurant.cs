@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace Shared.DBModels
@@ -21,6 +22,9 @@ namespace Shared.DBModels
         public string OpeningHours { get; set; }
         public Decimal Latitude { get; set; }
         public Decimal Longitude { get; set; }
+
+        [NotMapped]
+        public Double Rating { get; set; }
 
         public virtual ICollection<Review> Reviews {get;set;}
         
