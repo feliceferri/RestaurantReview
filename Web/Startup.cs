@@ -46,8 +46,13 @@ namespace Web
                 options.Password.RequireLowercase = false;
             });
 
-            services.AddControllersWithViews();
+            //If you are using ASP.NET Core 3.0, and experience that problem please install the NuGET package: Microsoft.AspNetCore.Mvc.NewtonsoftJson 3.0.0. (https://stackoverflow.com/questions/42521722/how-to-stop-self-referencing-loop-in-net-core-web-api)
+            //services.AddControllersWithViews()
+            //     .AddJsonOptions(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore); 
+            services.AddControllersWithViews().AddNewtonsoftJson(opt => opt.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore );
             services.AddRazorPages();
+
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Shared.DBModels;
 using Web.Data;
+using Web.ViewModels;
 
 namespace Web.Controllers
 {
@@ -50,12 +51,14 @@ namespace Web.Controllers
 
 
         // GET: Restaurants/Details/5
-        public async Task<IActionResult> Details(Guid? id)
+        public async Task<ActionResult<RestaurantDetail>> Details(Guid? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
+
+            RestaurantDetail res = new RestaurantDetail();
 
             var restaurant = await _context.Restaurants
                 .Include(r => r.CreatedBy)
@@ -65,7 +68,10 @@ namespace Web.Controllers
                 return NotFound();
             }
 
-            return View(restaurant);
+            res.Restaurant = restaurant;
+            res.Reviews = await _context.Reviews.Where(x => x.RestaurantId == restaurant.Id).ToListAsync();
+
+            return View(res);
         }
 
         // GET: Restaurants/Create

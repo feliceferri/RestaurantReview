@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
@@ -14,9 +15,11 @@ namespace Shared.DBModels
         public string Comment { get; set; }
 
         [DataType(DataType.MultilineText)]
+        [Display(Name="Owner Reply")]
         public string ReplyByTheOwner { get; set; }
 
         public Guid RestaurantId {get;set;}
+
         public Restaurant Restaurant {get;set;}
     }
 }

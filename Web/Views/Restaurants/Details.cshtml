@@ -1,4 +1,4 @@
-﻿@model Shared.DBModels.Restaurant
+﻿@model Web.ViewModels.RestaurantDetail
 
 @{
     ViewData["Title"] = "Details";
@@ -13,100 +13,163 @@
     <dl class="row">
         <div class="col-4">
             <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.Name)
+                @Html.DisplayNameFor(model => model.Restaurant.Name)
             </dt>
             <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.Name)
+                @Html.DisplayFor(model => model.Restaurant.Name)
             </dd>
             <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.Description)
+                @Html.DisplayNameFor(model => model.Restaurant.Description)
             </dt>
             <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.Description)
+                @Html.DisplayFor(model => model.Restaurant.Description)
             </dd>
             <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.Address)
+                @Html.DisplayNameFor(model => model.Restaurant.Address)
             </dt>
             <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.Address)
+                @Html.DisplayFor(model => model.Restaurant.Address)
             </dd>
             <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.PhoneNumber)
+                @Html.DisplayNameFor(model => model.Restaurant.PhoneNumber)
             </dt>
             <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.PhoneNumber)
+                @Html.DisplayFor(model => model.Restaurant.PhoneNumber)
             </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.OpeningHours)
+            @*<dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Restaurant.OpeningHours)
             </dt>
             <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.OpeningHours)
+                @Html.DisplayFor(model => model.Restaurant.OpeningHours)
             </dd>
             <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.Latitude)
+                @Html.DisplayNameFor(model => model.Restaurant.Latitude)
             </dt>
             <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.Latitude)
+                @Html.DisplayFor(model => model.Restaurant.Latitude)
             </dd>
             <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.Longitude)
+                @Html.DisplayNameFor(model => model.Restaurant.Longitude)
             </dt>
             <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.Longitude)
-            </dd>
+                @Html.DisplayFor(model => model.Restaurant.Longitude)
+            </dd>*@
             <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.ImageNameWithExtension)
+                @Html.DisplayNameFor(model => model.Restaurant.ImageNameWithExtension)
             </dt>
             <dd class="col-sm-10">
                 @*@Html.DisplayFor(model => model.ImageNameWithExtension)*@
-                <img src=".\Images\Restaurants\@Model.ImageNameWithExtension" style="max-height:50px" />
+                <img src=".\Images\Restaurants\@Model.Restaurant.ImageNameWithExtension" style="max-height:50px" />
             </dd>
             <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.Created)
+                @Html.DisplayNameFor(model => model.Restaurant.Created)
             </dt>
             <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.Created)
+                @Html.DisplayFor(model => model.Restaurant.Created)
+            </dd>
+            @*<dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Restaurant.LastUpdate)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Restaurant.LastUpdate)
             </dd>
             <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.LastUpdate)
+                @Html.DisplayNameFor(model => model.Restaurant.LastUpdateById)
             </dt>
             <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.LastUpdate)
+                @Html.DisplayFor(model => model.Restaurant.LastUpdateById)
             </dd>
             <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.LastUpdateById)
+                @Html.DisplayNameFor(model => model.Restaurant.Deleted)
             </dt>
             <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.LastUpdateById)
+                @Html.DisplayFor(model => model.Restaurant.Deleted)
             </dd>
             <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.Deleted)
+                @Html.DisplayNameFor(model => model.Restaurant.DeletedById)
             </dt>
             <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.Deleted)
-            </dd>
+                @Html.DisplayFor(model => model.Restaurant.DeletedById)
+            </dd>*@
             <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.DeletedById)
+                @Html.DisplayNameFor(model => model.Restaurant.CreatedBy)
             </dt>
             <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.DeletedById)
-            </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.CreatedBy)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.CreatedBy.Id)
+                @Html.DisplayFor(model => model.Restaurant.CreatedBy.Id)
             </dd>
         </div>
-        
+
         <div class="col-1"></div>
-        
-            <div class="col-4">
-                <img src=".\Images\Restaurants\@Model.ImageNameWithExtension" />
-            </div>
-</dl>
+
+        <div class="col-7">
+            <img src=".\Images\Restaurants\@Model.Restaurant.ImageNameWithExtension" />
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Reviews[0].Rating)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Reviews[0].VisitDate)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Reviews[0].Comment)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Reviews[0].ReplyByTheOwner)
+                        </th>
+                        @*<th>
+                            @Html.DisplayNameFor(model => model.Reviews[0].Restaurant)
+                        </th>*@
+                        <th>
+                            @Html.DisplayNameFor(model => model.Reviews[0].Created)
+                        </th>
+                        @*<th>
+                            @Html.DisplayNameFor(model => model.Reviews[0].CreatedBy)
+                        </th>*@
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Reviews)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Rating)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.VisitDate)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Comment)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ReplyByTheOwner)
+                            </td>
+                            @*<td>
+                                @Html.DisplayFor(modelItem => item.Restaurant.Id)
+                            </td>*@
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Created)
+                            </td>
+                            @*<td>
+                                @Html.DisplayFor(modelItem => item.CreatedBy.Id)
+                            </td>*@
+                            <td>
+                                <a asp-controller="Reviews" asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                                @*<a asp-action="Details" asp-route-id="@item.Id">Details</a> |*@
+                                <a asp-controller="Reviews" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+        </div>
+    </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Edit" asp-route-id="@Model.Restaurant.Id">Edit</a> |
     <a asp-action="Index">Back to List</a>
 </div>
