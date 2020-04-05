@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using System.Linq;
 using System.Diagnostics;
+using static Mobile.Services.APIComm;
+using Shared.DTOModels;
 
 namespace Mobile.ViewModels
 {
@@ -23,12 +25,25 @@ namespace Mobile.ViewModels
                 this.OnPropertyChanged(nameof(FrameCreateReview_Isvisible));
             } }
 
+        bool _ReplyEditorVisible = false;
+        public bool ReplyEditorVisible
+        {
+            get { return _ReplyEditorVisible; }
+            set
+            {
+                _ReplyEditorVisible = value;
+                this.OnPropertyChanged(nameof(ReplyEditorVisible));
+            }
+        }
+
         public Command SaveReviewCommand { get; set; }
+        public Command SaveReply { get; set; }
         public RestaurantViewModel(Guid RestaurantId)
         {
             MyReview.VisitDate = DateTime.Now;
 
             SaveReviewCommand = new Command(async () => await ExecuteSaveReviewCommand());
+            SaveReply = new Command(async (x) => await ExecuteSaveReplyCommand(x));
 
             Task.Run(async () =>
             {
@@ -38,7 +53,18 @@ namespace Mobile.ViewModels
 
         private async Task LoadData(Guid RestaurantId)
         {
-            var res = await Services.APIComm.CallGetAsync($"Restaurants/ByRestaurantId/{RestaurantId}/IncludeReviews");
+
+            CallAsync_Results res;
+
+            if (GlobalVariables.LoggedUser.Roles.Contains("Admin") || GlobalVariables.LoggedUser.Roles.Contains("Owner"))
+            {
+                res = await Services.APIComm.CallGetAsync($"Restaurants/ForOwners/ByRestaurantId/{RestaurantId}/IncludeReviewsPendingToReply");
+                ReplyEditorVisible = true;
+            }
+            else
+            {
+                res = await Services.APIComm.CallGetAsync($"Restaurants/ByRestaurantId/{RestaurantId}/IncludeReviews");
+            }
             if (res.Success == true)
             {
 
@@ -86,6 +112,53 @@ namespace Mobile.ViewModels
                     MyReview.RestaurantId = Restaurant.Id;
 
                     var res = await Services.APIComm.CallPostAsync(this.MyReview, "Reviews/New", true);
+                    if (res.Success == true)
+                    {
+                        FrameCreateReview_Isvisible = false;
+                        await LoadData(Restaurant.Id);
+                    }
+                    else
+                    {
+                        await Application.Current.MainPage.DisplayAlert("Error", string.Join(Environment.NewLine, res.ContentString_responJsonText), "Ok");
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+                await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "Ok");
+            }
+            finally
+            {
+                IsBusy = false;
+            }
+        }
+
+        async Task ExecuteSaveReplyCommand(object objReviewId)
+        {
+            IsBusy = true;
+
+            try
+            {
+                Guid ReviewId = Guid.Parse(objReviewId.ToString());
+                Review ReviewToUpdate = Restaurant.Reviews.Where(x => x.Id == ReviewId).FirstOrDefault();
+
+                if (string.IsNullOrWhiteSpace(ReviewToUpdate.ReplyByTheOwner) == true)
+                {
+                    await Application.Current.MainPage.DisplayAlert("Validation", "The Reply field is empty", "Ok");
+                }
+                else
+                {
+                    AddReplyToComment data = new AddReplyToComment()
+                    {
+                        ReviewId = ReviewId,
+                        ReviewReply = ReviewToUpdate.ReplyByTheOwner
+                    };
+
+                    
+
+                    var res = await Services.APIComm.CallPostAsync(data, "Reviews/AddReplyToComment", true);
                     if (res.Success == true)
                     {
                         FrameCreateReview_Isvisible = false;

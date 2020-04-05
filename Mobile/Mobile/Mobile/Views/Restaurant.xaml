@@ -8,7 +8,8 @@
     xmlns:custom="clr-namespace:Mobile.CustomControls"
     Shell.NavBarIsVisible="False"
     mc:Ignorable="d"
-    BackgroundColor="{d:StaticResource BackgroundBlueLight}">
+    BackgroundColor="{d:StaticResource BackgroundBlueLight}"
+    x:Name="Page">
     <ContentPage.Content>
 
 
@@ -165,6 +166,17 @@
 
                                 <Label Text="{Binding Comment}" VerticalTextAlignment="Center" FontSize="Medium" Margin="0,0,50,0" />
                                 <Label Text="{Binding ReplyByTheOwner}" HorizontalTextAlignment="End" FontSize="Small" TextColor="DarkOrange" Margin="50,0,0,0" />
+
+                                <Frame Padding="0" Margin="50,0,0,0">
+                                <Editor Text="{Binding ReplyByTheOwner}" IsVisible="{Binding RepleyEditorVisible}" 
+                                        BackgroundColor="White" 
+                                        FontSize="Medium" HeightRequest="80"  ></Editor>
+                                </Frame>
+                                <Button  Text="Save" IsVisible="{Binding ReplyEditorVisible}"
+                                         Command="{Binding Source={x:Reference Page}, Path=BindingContext.SaveReply}"  CommandParameter="{Binding Id}"
+                                        BackgroundColor="DarkOrange" TextColor="White" HorizontalOptions="End"
+                                        CornerRadius="50" WidthRequest="100" Margin="0,5,0,5" ></Button>
+
 
                                 <Label BackgroundColor="Gray" HeightRequest="1" Margin="0,4,0,4"></Label>
 

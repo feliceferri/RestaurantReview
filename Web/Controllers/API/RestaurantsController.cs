@@ -218,7 +218,7 @@ namespace Web.Controllers.API
         }
 
         [HttpGet]
-        [Route("/ForOwners/ByRestaurantId/{RestaurantId}/IncludeReviewsPendingToReply")]
+        [Route("ForOwners/ByRestaurantId/{RestaurantId}/IncludeReviewsPendingToReply")]
         public async Task<ActionResult<List<Restaurant>>> ForOwnersByRestaurantId_IncludeReviewsPendingToReply(Guid RestaurantId)
         {
             if (!ModelState.IsValid)

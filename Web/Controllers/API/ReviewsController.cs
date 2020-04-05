@@ -75,5 +75,36 @@ namespace Web.Controllers.API
                 throw;
             }
         }
+
+        [HttpPost]
+        [Route("AddReplyToComment")]
+        public async Task<ActionResult<Review>> AddReplyToComment(AddReplyToComment model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            try
+            {
+
+                var row = await _ApplicationDbContext.Reviews.Where(x => x.Id == model.ReviewId).FirstOrDefaultAsync();
+
+                if(row != null)
+                {
+                    row.ReplyByTheOwner = model.ReviewReply;
+                }
+                
+                var result = _ApplicationDbContext.SaveChanges();
+
+                 return Ok(model);
+               
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, nameof(New));
+                throw;
+            }
+        }
     }
 }
