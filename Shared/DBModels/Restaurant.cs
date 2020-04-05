@@ -25,6 +25,7 @@ namespace Shared.DBModels
 
         [NotMapped]
         public Double Rating { get; set; }
+        
 
         public virtual ICollection<Review> Reviews {get;set;}
         

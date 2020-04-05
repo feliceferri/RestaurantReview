@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace Shared.DBModels
@@ -21,5 +22,8 @@ namespace Shared.DBModels
         public Guid RestaurantId {get;set;}
 
         public Restaurant Restaurant {get;set;}
+
+        [NotMapped]
+        public string TypeOfReview { get; set; }
     }
 }

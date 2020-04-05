@@ -175,6 +175,7 @@ namespace Web.Controllers.API
 
                     if (HighestReview != null)
                     {
+                        HighestReview.TypeOfReview = "Best:";
                         Reviews.Add(HighestReview);
                     }
                         
@@ -185,6 +186,7 @@ namespace Web.Controllers.API
 
                     if (LowestReview != null && HighestReview.Id != LowestReview.Id)
                     {
+                        LowestReview.TypeOfReview = "Worst:";
                         Reviews.Add(LowestReview);
                     }
 
@@ -195,7 +197,8 @@ namespace Web.Controllers.API
 
                     if (LastReview != null && LastReview.Id != HighestReview.Id && LastReview.Id != LowestReview.Id)
                     {
-                        Reviews.Add(LowestReview);
+                        LastReview.TypeOfReview = "Last:";
+                        Reviews.Add(LastReview);
                     }
 
                     res.Rating = await (from p in _ApplicationDbContext.Reviews
@@ -242,6 +245,14 @@ namespace Web.Controllers.API
                                         where p.RestaurantId == RestaurantId
                                         select p).AverageAsync(x => x.Rating);
 
+
+                    if(res.Reviews != null)
+                    {
+                        foreach(var item in res.Reviews)
+                        {
+                            item.TypeOfReview = "Pending: ";
+                        }
+                    }
                     
                 }
 

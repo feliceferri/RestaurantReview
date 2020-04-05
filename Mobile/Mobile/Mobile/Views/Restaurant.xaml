@@ -134,17 +134,25 @@
                                                 Orientation="Vertical">
 
                                 <Grid>
-                                    <Label
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label
                                                         FontAttributes="Bold"
                                                         FontSize="17"
                                                         LineBreakMode="WordWrap"
-                                                        Text="{Binding VisitDate}"
+                                                        Text="{Binding TypeOfReview}"
                                                         TextColor="Black" />
+                                        <Label
+                                                        FontAttributes="Bold"
+                                                        FontSize="17"
+                                                        LineBreakMode="WordWrap"
+                                                        Margin="5,0,0,0"
+                                                        Text="{Binding VisitDate, StringFormat='{0:MM/dd/yyyy}'}"
+                                                        TextColor="Gray" />
+                                        </StackLayout>
 
 
 
-
-                                    <custom:RatingBar
+                            <custom:RatingBar
                                                         HeightRequest="15"
                                                         HorizontalOptions="End"
                                                         IsReadOnly="True"

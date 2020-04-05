@@ -40,6 +40,10 @@ namespace Mobile.ViewModels
                     {
                         User.Roles = new List<string>() { "Owner" };
                     }
+                    else
+                    {
+                        User.Roles = new List<string>() { "Regular" };
+                    }
                     var res = await Services.APIComm.CallPostAsync(User, "Users/Register", true);
                     if (res.Success == true)
                     {

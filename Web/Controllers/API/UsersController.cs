@@ -44,6 +44,7 @@ namespace Web.Controllers.WebApi
                 Email = model.Email,
                 Name = model.Name,
                 EmailConfirmed = true,
+                CreatedDate = DateTime.Now
             };
 
             var result = await _userManager.CreateAsync(User, model.Password);
