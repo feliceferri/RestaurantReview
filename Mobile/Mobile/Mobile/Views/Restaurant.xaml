@@ -84,17 +84,21 @@
                                     TextColor="Gray"
                                     VerticalOptions="Center" />
 
-                                <Label
-                                    Grid.Row="2"
+                        <Grid Grid.Row="2"
                                     Grid.Column="0"
                                     Grid.ColumnSpan="4"
+                                    HorizontalOptions="FillAndExpand">
+                                <Label
+                                    
                                     FontSize="16"
                                     HorizontalTextAlignment="Center"
                                     Text="{Binding Restaurant.PhoneNumber }"
                                     TextColor="Gray"
                                     VerticalOptions="Center" />
+                            
+                            <Switch IsVisible="{Binding ImTheOwner}" IsToggled="{Binding SeeItAsUser}"></Switch>
 
-
+                        </Grid>
                     </StackLayout>
                 </Frame>
 
@@ -126,7 +130,7 @@
                 <CollectionView ItemsSource="{Binding Restaurant.Reviews}"
                                     x:Name="ListReviews"
                                     Margin="30,5,30,0"
-                                    SelectionMode="Single">
+                                    SelectionMode="None">
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
                             <StackLayout
@@ -167,12 +171,12 @@
                                 <Label Text="{Binding Comment}" VerticalTextAlignment="Center" FontSize="Medium" Margin="0,0,50,0" />
                                 <Label Text="{Binding ReplyByTheOwner}" HorizontalTextAlignment="End" FontSize="Small" TextColor="DarkOrange" Margin="50,0,0,0" />
 
-                                <Frame Padding="0" Margin="50,0,0,0">
-                                <Editor Text="{Binding ReplyByTheOwner}" IsVisible="{Binding RepleyEditorVisible}" 
+                                <Frame Padding="0" Margin="50,0,0,0" IsVisible="{Binding Source={x:Reference Page}, Path=BindingContext.ReplyEditorVisible}" >
+                                <Editor Text="{Binding ReplyByTheOwner}" 
                                         BackgroundColor="White" 
                                         FontSize="Medium" HeightRequest="80"  ></Editor>
                                 </Frame>
-                                <Button  Text="Save" IsVisible="{Binding ReplyEditorVisible}"
+                                <Button  Text="Save" IsVisible="{Binding Source={x:Reference Page}, Path=BindingContext.ReplyEditorVisible}"
                                          Command="{Binding Source={x:Reference Page}, Path=BindingContext.SaveReply}"  CommandParameter="{Binding Id}"
                                         BackgroundColor="DarkOrange" TextColor="White" HorizontalOptions="End"
                                         CornerRadius="50" WidthRequest="100" Margin="0,5,0,5" ></Button>

@@ -36,6 +36,34 @@ namespace Mobile.ViewModels
             }
         }
 
+        bool _ImTheOwner = false;
+        public bool ImTheOwner
+        {
+            get { return _ImTheOwner; }
+            set
+            {
+                _ImTheOwner = value;
+                this.OnPropertyChanged(nameof(ImTheOwner));
+            }
+        }
+
+
+        bool _SeeItAsUser = false;
+        public bool SeeItAsUser
+        {
+            get { return _SeeItAsUser; }
+            set
+            {
+                _SeeItAsUser = value;
+                this.OnPropertyChanged(nameof(SeeItAsUser));
+
+                Task.Run(async () =>
+                {
+                    await LoadData(Restaurant.Id);
+                });
+            }
+        }
+
         public Command SaveReviewCommand { get; set; }
         public Command SaveReply { get; set; }
         public RestaurantViewModel(Guid RestaurantId)
@@ -44,6 +72,11 @@ namespace Mobile.ViewModels
 
             SaveReviewCommand = new Command(async () => await ExecuteSaveReviewCommand());
             SaveReply = new Command(async (x) => await ExecuteSaveReplyCommand(x));
+
+            if(GlobalVariables.LoggedUser.Roles.Contains("Admin") || GlobalVariables.LoggedUser.Roles.Contains("Owner"))
+            {
+                this.ImTheOwner = true;
+            }
 
             Task.Run(async () =>
             {
@@ -55,11 +88,16 @@ namespace Mobile.ViewModels
         {
 
             CallAsync_Results res;
-
+            bool OwnersView = false;
             if (GlobalVariables.LoggedUser.Roles.Contains("Admin") || GlobalVariables.LoggedUser.Roles.Contains("Owner"))
             {
-                res = await Services.APIComm.CallGetAsync($"Restaurants/ForOwners/ByRestaurantId/{RestaurantId}/IncludeReviewsPendingToReply");
+                OwnersView = true;
                 ReplyEditorVisible = true;
+            }
+
+            if (this.SeeItAsUser == false && OwnersView == true)
+            {
+                res = await Services.APIComm.CallGetAsync($"Restaurants/ForOwners/ByRestaurantId/{RestaurantId}/IncludeReviewsPendingToReply");
             }
             else
             {
