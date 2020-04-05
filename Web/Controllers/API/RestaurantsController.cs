@@ -158,23 +158,96 @@ namespace Web.Controllers.API
                 return BadRequest(ModelState);
             }
 
+            List<Review> Reviews = new List<Review>();
+
             try
             {
                 
                 var res = await _ApplicationDbContext.Restaurants.Where(x => x.Id == RestaurantId)
-                                               .Include(x=> x.Reviews)
-                                               .FirstOrDefaultAsync();
+                                                    .FirstOrDefaultAsync();
                
                 if(res != null)
                 {
+                    var HighestReview = await (from p in _ApplicationDbContext.Reviews
+                                         where p.RestaurantId == RestaurantId
+                                         orderby p.Rating descending, p.Created descending
+                                               select p).Take(1).FirstOrDefaultAsync();
+
+                    if (HighestReview != null)
+                    {
+                        Reviews.Add(HighestReview);
+                    }
+                        
+                    var LowestReview = await (from p in _ApplicationDbContext.Reviews
+                                               where p.RestaurantId == RestaurantId
+                                               orderby p.Rating ascending, p.Created descending
+                                              select p).Take(1).FirstOrDefaultAsync();
+
+                    if (LowestReview != null && HighestReview.Id != LowestReview.Id)
+                    {
+                        Reviews.Add(LowestReview);
+                    }
+
+                    var LastReview = await (from p in _ApplicationDbContext.Reviews
+                                              where p.RestaurantId == RestaurantId
+                                              orderby  p.Created descending
+                                              select p).Take(1).FirstOrDefaultAsync();
+
+                    if (LastReview != null && LastReview.Id != HighestReview.Id && LastReview.Id != LowestReview.Id)
+                    {
+                        Reviews.Add(LowestReview);
+                    }
+
                     res.Rating = await (from p in _ApplicationDbContext.Reviews
                                         where p.RestaurantId == RestaurantId
                                         select p).AverageAsync(x => x.Rating);
+
+                    res.Reviews = Reviews;
                 }
 
                 return Ok(res);
             }
             catch(Exception ex)
+            {
+                _logger.LogError(ex, nameof(ByUserId));
+                throw;
+            }
+        }
+
+        [HttpGet]
+        [Route("/ForOwners/ByRestaurantId/{RestaurantId}/IncludeReviewsPendingToReply")]
+        public async Task<ActionResult<List<Restaurant>>> ForOwnersByRestaurantId_IncludeReviewsPendingToReply(Guid RestaurantId)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            
+            try
+            {
+
+                var res = await _ApplicationDbContext.Restaurants.Where(x => x.Id == RestaurantId)
+                                                    .FirstOrDefaultAsync();
+
+                if (res != null)
+                {
+                    res.Reviews = await (from p in _ApplicationDbContext.Reviews
+                                         where p.RestaurantId == RestaurantId && p.ReplyByTheOwner == null
+                                         orderby p.Created descending
+                                         select p).ToListAsync();
+
+                    
+                    res.Rating = await (from p in _ApplicationDbContext.Reviews
+                                        where p.RestaurantId == RestaurantId
+                                        select p).AverageAsync(x => x.Rating);
+
+                    
+                }
+
+                return Ok(res);
+            }
+            catch (Exception ex)
             {
                 _logger.LogError(ex, nameof(ByUserId));
                 throw;
