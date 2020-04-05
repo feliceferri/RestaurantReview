@@ -30,9 +30,7 @@
                                     IsClippedToBounds="True">
                                     <Grid>
                                         <Image
-                                        Grid.Row="0"
-                                        Grid.Column="1"
-                                        Aspect="AspectFill"
+                                       Aspect="AspectFill"
                                         HeightRequest="135"
                                         HorizontalOptions="FillAndExpand"
                                         Source="{Binding Restaurant.ImageFullURL}"
@@ -40,10 +38,6 @@
 
                                         
                                     <custom:RatingBar BackgroundColor="White" Opacity="0.8" VerticalOptions="EndAndExpand" Padding="4"
-                                        x:Name="RatingControl"
-                                        Grid.Row="0"
-                                        Grid.Column="0"
-                                        Grid.ColumnSpan="4"
                                         IsReadOnly="True"
                                         HeightRequest="27"
                                         Rating="{Binding Restaurant.Rating}" />

@@ -18,11 +18,62 @@ namespace Mobile.ViewModels
 
         public ObservableCollection<Restaurant> ListRestaurants { get; set; }
 
+
+        int? _RatingFilter;
+        public int? RatingFilter
+        {
+            get { return _RatingFilter; }
+            set
+            {
+                _RatingFilter = value;
+                this.OnPropertyChanged(nameof(RatingFilter));
+            }
+        }
+
+        bool _BtnAddRestaurantIsVisible = false;
+        public bool BtnAddRestaurantIsVisible { 
+            get { return _BtnAddRestaurantIsVisible; }
+            set { _BtnAddRestaurantIsVisible = value;
+                this.OnPropertyChanged(nameof(BtnAddRestaurantIsVisible));
+            } }
+
+        bool _ShowFilterByRating = false;
+        public bool ShowFilterByRating
+        {
+            get { return _ShowFilterByRating; }
+            set
+            {
+                _ShowFilterByRating = value;
+                this.OnPropertyChanged(nameof(ShowFilterByRating));
+            }
+        }
+
+        bool _IsFilteringByRating = false;
+        public bool IsFilteringByRating
+        {
+            get { return _IsFilteringByRating; }
+            set
+            {
+                _IsFilteringByRating = value;
+                this.OnPropertyChanged(nameof(IsFilteringByRating));
+            }
+        }
+                
+
         public  MainViewModel()
         {
             AddRestaurantCommand = new Command(async () => await ExecuteAddRestaurantCommand());
             SaveNewRestaurantCommand = new Command(async () => await ExecuteSaveNewRestaurantCommand());
 
+            if(GlobalVariables.LoggedUser.Roles.Contains("Owner") || GlobalVariables.LoggedUser.Roles.Contains("Admin"))
+            {
+                this.BtnAddRestaurantIsVisible = true;
+            }
+            else
+            {
+                this.ShowFilterByRating = true;
+                
+            }
 
             Task.Run(async () =>
             {

@@ -22,7 +22,7 @@ namespace Mobile
 
             
             
-            //MainPage = ShellInstance;
+            //MainPage = new AppShell();
 
             MainPage = new Login();
         }

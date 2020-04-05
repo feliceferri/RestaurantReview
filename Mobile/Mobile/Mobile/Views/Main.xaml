@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:custom="clr-namespace:Mobile.CustomControls"
              mc:Ignorable="d"
              x:Class="Mobile.Views.Main"
              Shell.NavBarIsVisible="False"
@@ -21,17 +22,25 @@
                 <ColumnDefinition Width="0.5"></ColumnDefinition>
             </Grid.ColumnDefinitions>
 
-            
+
             <Grid Grid.Row="1" Grid.Column="1" >
                 <Label FontSize="40" HorizontalOptions="Start" 
                        Text="{Binding Title}" 
                    FontAttributes="Bold" TextColor="White" ></Label>
-                    <Button Command="{Binding AddRestaurantCommand}" Text="Add +" HorizontalOptions="End" 
+                <Button IsVisible="{Binding BtnAddRestaurantIsVisible}" Command="{Binding AddRestaurantCommand}" Text="Add +" HorizontalOptions="End" 
                             BackgroundColor="DarkOrange" TextColor="White" FontAttributes="Bold"
                             CornerRadius="50" Margin="0,5,0,0"></Button>
-                </Grid>
 
-                <ScrollView Grid.Row="2" Grid.Column="1">
+                <StackLayout IsVisible="{Binding ShowFilterByRating}" HorizontalOptions="End" Margin="0,0,10,0">
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="End">
+                        <Label Text="Filter" TextColor="White" HorizontalOptions="Center"></Label>
+                        <Switch  IsToggled="{Binding IsFilteringByRating}" HorizontalOptions="End" ></Switch>
+                    </StackLayout>
+                    <custom:RatingBar IsVisible="{Binding IsFilteringByRating}" HeightRequest="16" Rating="{Binding RatingFilter}" />
+                </StackLayout>
+            </Grid>
+
+            <ScrollView Grid.Row="2" Grid.Column="1" Margin="0,20,0,0">
                     <StackLayout>
                     <Frame IsVisible="{Binding ShowEditingRestaurant}" 
                        Margin="0,15,0,0" BackgroundColor="LightGray" CornerRadius="15" >
@@ -78,13 +87,24 @@
                                         <ColumnDefinition Width="3*"></ColumnDefinition>
                                     </Grid.ColumnDefinitions>
 
-                                    <StackLayout>
-                                        <Frame CornerRadius="5" IsClippedToBounds="True" Margin="5">
-                                            <Image HeightRequest="40"></Image>
-                                        </Frame>
-                                     </StackLayout>
+                                    <StackLayout >
 
-                                    <StackLayout Grid.Column="1" VerticalOptions="CenterAndExpand">
+                                        <Frame CornerRadius="5" IsClippedToBounds="True" Margin="5,5,5,7" BackgroundColor="White" 
+                                               Padding="0" VerticalOptions="FillAndExpand">
+
+                                                <Image HeightRequest="40" VerticalOptions="FillAndExpand">
+                                            </Image>
+                                            </Frame>
+                                        
+                                    </StackLayout>
+                                    
+                                    <custom:RatingBar  VerticalOptions="EndAndExpand" 
+                                                IsReadOnly="True"
+                                                HeightRequest="15"
+                                                Rating="{Binding Rating}" />
+                                
+
+                                <StackLayout Grid.Column="1" VerticalOptions="CenterAndExpand">
                                         <Label Text="{Binding Name}" TextColor="White" FontAttributes="Bold" FontSize="Large"></Label>
                                         <Label Text="{Binding Description}" TextColor="White"></Label>
                                      </StackLayout>

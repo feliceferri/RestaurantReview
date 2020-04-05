@@ -39,6 +39,12 @@ namespace Web.Controllers.API
         }
 
 
+        private class RestaurantWithAverageRating
+        {
+            public Restaurant Restaurant { get; set; }
+            public Double? Rating { get; set; }
+        }
+
         [HttpGet]
         [Route("ByUserId/{UserId}")]
         public async Task<ActionResult<List<Restaurant>>> ByUserId(string UserId)
@@ -50,17 +56,35 @@ namespace Web.Controllers.API
 
             try
             {
-                List<Restaurant> res;
+                List<RestaurantWithAverageRating> preRes;
+                List<Restaurant> res = null;
 
                 List<string> Roles = await _ApplicationDbContext.UserRoles.Where(x => x.UserId == UserId).Select(x => x.Role.Name).ToListAsync();
                 if (Roles.Contains("Owner"))
                 {
-                    res = await _ApplicationDbContext.Restaurants.Where(x => x.CreatedById == UserId).ToListAsync();
+                    //res = await _ApplicationDbContext.Restaurants.Where(x => x.CreatedById == UserId).ToListAsync();
+                    preRes = await (from p in _ApplicationDbContext.Restaurants
+                                      orderby p.Reviews.Average(x => x.Rating) descending
+                                      select new RestaurantWithAverageRating() { Restaurant = p, Rating = p.Reviews.Average(x => x.Rating) }).ToListAsync();
+
                 }
                 else
                 {
                     //Admin && Users
-                    res = await _ApplicationDbContext.Restaurants.ToListAsync();
+                    //res = await _ApplicationDbContext.Restaurants.ToListAsync();
+                    preRes = await (from p in _ApplicationDbContext.Restaurants
+                                       orderby p.Reviews.Average(x => x.Rating) descending
+                                      select new RestaurantWithAverageRating() { Restaurant = p, Rating = p.Reviews.Average(x => x.Rating) }).Take(50).ToListAsync();
+                }
+
+                if(preRes != null)
+                {
+                    res = new List<Restaurant>();
+                    foreach (var item in preRes)
+                    {
+                        item.Restaurant.Rating =  item.Rating.GetValueOrDefault();
+                        res.Add(item.Restaurant);
+                    }
                 }
 
                 return Ok(res);
