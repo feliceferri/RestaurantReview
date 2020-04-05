@@ -36,8 +36,7 @@ namespace Mobile.Views
                 //this.ListRestaurants.SelectedItem = null;
                 ((CollectionView)sender).SelectedItem = null;
                 await GlobalVariables.NavigateToAsync("Restaurant");
-                NavigationBar.CurrentItem = 
-            }
+             }
             catch (Exception ex)
             {
 

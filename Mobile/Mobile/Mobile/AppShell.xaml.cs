@@ -13,6 +13,8 @@ namespace Mobile
 
             Routing.RegisterRoute("Main", typeof(Views.Main));
             Routing.RegisterRoute("Restaurant", typeof(Views.Restaurant));
+
+            GlobalVariables.NavigationBar = this.TabBar;
         }
     }
 }

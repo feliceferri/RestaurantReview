@@ -30,7 +30,7 @@
     </Shell.Resources>
 
     <!-- Your Pages -->
-    <TabBar>
+    <TabBar x:Name="TabBar">
         <Tab Title="Main" Icon="tab_feed.png">
             <ShellContent ContentTemplate="{DataTemplate local:Main}" />
         </Tab>

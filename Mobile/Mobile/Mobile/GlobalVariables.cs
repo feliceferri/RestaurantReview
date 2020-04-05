@@ -51,7 +51,7 @@ namespace Mobile
             switch (TabBarItemName)
             {
                 case "Main":
-                return NavigationBar.Items[0];
+                    return NavigationBar.Items[0];
                     break;
                 case "Restaurant":
                     return NavigationBar.Items[1];

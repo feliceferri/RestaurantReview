@@ -21,8 +21,7 @@ namespace Mobile
                                                                             Roles = new List<string>() { "Owner" } };
 
             
-            //var ShellInstance = new AppShell();
-            //GlobalVariables.NavigationBar = ShellInstance.Items[0] as TabBar;
+            
             //MainPage = ShellInstance;
 
             MainPage = new Login();
