@@ -97,6 +97,59 @@ namespace Web.Controllers.API
         }
 
         [HttpGet]
+        [Route("ByUserId/{UserId}/FilterByRating/{Rating}")]
+        public async Task<ActionResult<List<Restaurant>>> ByUserId(string UserId, int Rating)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            try
+            {
+                List<RestaurantWithAverageRating> preRes;
+                List<Restaurant> res = null;
+
+                List<string> Roles = await _ApplicationDbContext.UserRoles.Where(x => x.UserId == UserId).Select(x => x.Role.Name).ToListAsync();
+                if (Roles.Contains("Owner"))
+                {
+                    //res = await _ApplicationDbContext.Restaurants.Where(x => x.CreatedById == UserId).ToListAsync();
+                    preRes = await (from p in _ApplicationDbContext.Restaurants
+                                    where p.Reviews.Average(x => x.Rating) >= Rating && p.Reviews.Average(x => x.Rating) < (Rating + 0.99)
+                                    orderby p.Reviews.Average(x => x.Rating) descending
+                                    select new RestaurantWithAverageRating() { Restaurant = p, Rating = p.Reviews.Average(x => x.Rating) }).ToListAsync();
+
+                }
+                else
+                {
+                    //Admin && Users
+                    //res = await _ApplicationDbContext.Restaurants.ToListAsync();
+                    preRes = await (from p in _ApplicationDbContext.Restaurants
+                                    where p.Reviews.Average(x => x.Rating) >= Rating && p.Reviews.Average(x => x.Rating) < (Rating + 0.99)
+                                    orderby p.Reviews.Average(x => x.Rating) descending
+                                    select new RestaurantWithAverageRating() { Restaurant = p, Rating = p.Reviews.Average(x => x.Rating) }).Take(50).ToListAsync();
+                }
+
+                if (preRes != null)
+                {
+                    res = new List<Restaurant>();
+                    foreach (var item in preRes)
+                    {
+                        item.Restaurant.Rating = item.Rating.GetValueOrDefault();
+                        res.Add(item.Restaurant);
+                    }
+                }
+
+                return Ok(res);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, nameof(ByUserId));
+                throw;
+            }
+        }
+
+        [HttpGet]
         [Route("ByRestaurantId/{RestaurantId}/IncludeReviews")]
         public async Task<ActionResult<List<Restaurant>>> ByRestaurantId(Guid RestaurantId)
         {

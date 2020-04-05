@@ -6,6 +6,7 @@ using System.Collections.ObjectModel;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
+using static Mobile.Services.APIComm;
 
 namespace Mobile.ViewModels
 {
@@ -27,6 +28,11 @@ namespace Mobile.ViewModels
             {
                 _RatingFilter = value;
                 this.OnPropertyChanged(nameof(RatingFilter));
+
+                Task.Run(async () =>
+                {
+                    await LoadData();
+                });
             }
         }
 
@@ -49,13 +55,20 @@ namespace Mobile.ViewModels
         }
 
         bool _IsFilteringByRating = false;
-        public bool IsFilteringByRating
+        public  bool IsFilteringByRating
         {
             get { return _IsFilteringByRating; }
             set
             {
                 _IsFilteringByRating = value;
                 this.OnPropertyChanged(nameof(IsFilteringByRating));
+
+
+                    Task.Run(async () =>
+                    {
+                        await LoadData();
+                    });
+
             }
         }
                 
@@ -77,15 +90,31 @@ namespace Mobile.ViewModels
 
             Task.Run(async () =>
             {
-                var res = await Services.APIComm.CallGetAsync("Restaurants/ByUserId/" + GlobalVariables.LoggedUser.ID);
-                if (res.Success == true)
-                {
-                    ListRestaurants = new ObservableCollection<Restaurant>(Newtonsoft.Json.JsonConvert.DeserializeObject<List<Restaurant>>(res.ContentString_responJsonText));
-                    this.OnPropertyChanged(nameof(ListRestaurants));
-                }
+                await LoadData();
             });
             
         }
+
+        private async Task LoadData()
+        {
+            CallAsync_Results res;
+
+            if (IsFilteringByRating == true)
+            {
+                res = await Services.APIComm.CallGetAsync(@"Restaurants/ByUserId/" + GlobalVariables.LoggedUser.ID + $"/FilterByRating/{RatingFilter.GetValueOrDefault()}");
+            }
+            else
+            {
+                res = await Services.APIComm.CallGetAsync(@"Restaurants/ByUserId/" + GlobalVariables.LoggedUser.ID);
+            }
+
+            if (res.Success == true)
+            {
+                ListRestaurants = new ObservableCollection<Restaurant>(Newtonsoft.Json.JsonConvert.DeserializeObject<List<Restaurant>>(res.ContentString_responJsonText));
+                this.OnPropertyChanged(nameof(ListRestaurants));
+            }
+        }
+
         public string Title
         {
             get { return GlobalVariables.LoggedUser.Roles.Contains("Owner") ? "My Restaurants" : "Restaurants"; }
