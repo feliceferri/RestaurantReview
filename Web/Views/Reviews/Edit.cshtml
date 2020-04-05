@@ -5,9 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Edit</h1>
-
-<h4>Review</h4>
+<h4>Edit Review</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -15,10 +13,12 @@
 
             <input type="hidden" asp-for="Id" />
             <input type="hidden" asp-for="LastUpdateById" />
+            <input type="hidden" asp-for="Created" />
+            <input type="hidden" asp-for="CreatedById" />
             <input type="hidden" asp-for="Deleted" />
             <input type="hidden" asp-for="DeletedById" />
             <input type="hidden" asp-for="RestaurantId" />
-            
+
             <div class="form-group">
                 <label asp-for="RestaurantId" class="control-label"></label>
                 @*<select asp-for="RestaurantId" class="form-control" asp-items="ViewBag.RestaurantId"></select>*@

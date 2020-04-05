@@ -5,9 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Edit</h1>
-
-<h4>Restaurant</h4>
+<h4>Edit Restaurant</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -33,7 +31,7 @@
                 <input asp-for="PhoneNumber" class="form-control" />
                 <span asp-validation-for="PhoneNumber" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            @*<div class="form-group">
                 <label asp-for="OpeningHours" class="control-label"></label>
                 <input asp-for="OpeningHours" class="form-control" />
                 <span asp-validation-for="OpeningHours" class="text-danger"></span>
@@ -47,12 +45,12 @@
                 <label asp-for="Longitude" class="control-label"></label>
                 <input asp-for="Longitude" class="form-control" />
                 <span asp-validation-for="Longitude" class="text-danger"></span>
-            </div>
-            <div class="form-group">
+            </div>*@
+            @*<div class="form-group">
                 <label asp-for="ImageNameWithExtension" class="control-label"></label>
                 <input asp-for="ImageNameWithExtension" class="form-control" />
                 <span asp-validation-for="ImageNameWithExtension" class="text-danger"></span>
-            </div>
+            </div>*@
             <input type="hidden" asp-for="Id" />
             <div class="form-group">
                 <label asp-for="Created" class="control-label"></label>
@@ -64,7 +62,7 @@
                 <select asp-for="CreatedById" class="form-control" asp-items="ViewBag.CreatedById"></select>
                 <span asp-validation-for="CreatedById" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            @*<div class="form-group">
                 <label asp-for="LastUpdate" class="control-label"></label>
                 <input asp-for="LastUpdate" class="form-control" />
                 <span asp-validation-for="LastUpdate" class="text-danger"></span>
@@ -83,7 +81,7 @@
                 <label asp-for="DeletedById" class="control-label"></label>
                 <input asp-for="DeletedById" class="form-control" />
                 <span asp-validation-for="DeletedById" class="text-danger"></span>
-            </div>
+            </div>*@
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>

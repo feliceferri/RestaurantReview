@@ -5,8 +5,6 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Details</h1>
-
 <div>
     <h4>Restaurant</h4>
     <hr />
@@ -95,14 +93,14 @@
                 @Html.DisplayNameFor(model => model.Restaurant.CreatedBy)
             </dt>
             <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.Restaurant.CreatedBy.Id)
+                @Html.DisplayFor(model => model.Restaurant.CreatedBy.Name)
             </dd>
         </div>
 
         <div class="col-1"></div>
 
         <div class="col-7">
-            <img src=".\Images\Restaurants\@Model.Restaurant.ImageNameWithExtension" />
+           
 
             <table class="table">
                 <thead>
