@@ -16,11 +16,11 @@
 <p>
     @*<a asp-action="Create">Create New</a>*@
 </p>
-<table class="table">
+<table class="table table-hover">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.UserName)
+                @Html.DisplayNameFor(model => model.Name)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.UserRoles)
@@ -40,7 +40,7 @@
         {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.UserName)
+                @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>
                 @*@Html.DisplayFor(modelItem => string.Join(",", item.UserRoles.Select(x=> x.Role.Name)))*@

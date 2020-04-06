@@ -1,0 +1,56 @@
+﻿@model Web.ViewModels.ApplicationUserWithSingleRole
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h4>Edit User</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+
+                      
+        <form asp-action="Edit">
+
+            <input type="hidden" asp-for="User.Id" />
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="User.Name" class="control-label"></label>
+                <input asp-for="User.Name" class="form-control" />
+                <span asp-validation-for="User.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="User.Email" class="control-label"></label>
+                <textarea asp-for="User.Email" class="form-control"></textarea>
+                <span asp-validation-for="User.Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Role</label>
+                @Html.DropDownList("RoleName", new List<SelectListItem>
+{
+   new SelectListItem{ Text="Regular", Value = "Regular" },
+   new SelectListItem{ Text="Owner", Value = "Owner" },
+   new SelectListItem{ Text="Admin", Value = "Admin" },
+ }, new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                <label asp-for="User.CreatedDate" class="control-label"></label>
+                <input asp-for="User.CreatedDate" class="form-control" />
+                <span asp-validation-for="User.CreatedDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

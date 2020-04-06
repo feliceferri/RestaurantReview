@@ -7,11 +7,13 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Shared.DBModels;
 using Web.Data;
+using Web.ViewModels;
 
 namespace Web.Controllers
 {
@@ -20,10 +22,13 @@ namespace Web.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly IWebHostEnvironment _env;
-        public UsersController(ApplicationDbContext context, IWebHostEnvironment env)
+        private readonly UserManager<ApplicationUser> _userManager;
+        public UsersController(ApplicationDbContext context, IWebHostEnvironment env,
+                                UserManager<ApplicationUser> userManager)
         {
             _context = context;
             _env = env;
+            _userManager = userManager;
         }
 
         [Authorize(Roles = "Admin")]
@@ -54,23 +59,29 @@ namespace Web.Controllers
             return View(res);
         }
 
-       
 
-        // GET: Restaurants/Edit/5
-        public async Task<IActionResult> Edit(string id)
+
+        public async Task<ActionResult<ApplicationUserWithSingleRole>> Edit(string id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var user = await _context.Users.FindAsync(id);
+            ApplicationUser user = await _context.Users.Where(x => x.Id == id)
+                                   .Include(x => x.UserRoles).ThenInclude(x => x.Role).FirstOrDefaultAsync();
             if (user == null)
             {
                 return NotFound();
             }
-            
-            return View(user);
+
+            ViewData["Role"] = new SelectList(_context.Roles, "Name", "Name");
+
+            ApplicationUserWithSingleRole userWithRole = new ApplicationUserWithSingleRole();
+            userWithRole.User = user;
+            userWithRole.RoleName = user.UserRoles.FirstOrDefault()?.Role?.Name;
+
+            return View(userWithRole);
         }
 
         // POST: Restaurants/Edit/5
@@ -78,9 +89,9 @@ namespace Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, ApplicationUser user)
+        public async Task<IActionResult> Edit(string id, ApplicationUserWithSingleRole model)
         {
-            if (id != user.Id)
+            if (id != model.User.Id)
             {
                 return NotFound();
             }
@@ -89,12 +100,25 @@ namespace Web.Controllers
             {
                 try
                 {
-                    _context.Update(user);
+                    //_context.Update(model);
+
+                    var user = await _context.Users.Where(x => x.Id == model.User.Id).FirstOrDefaultAsync();
+                    user.Name = model.User.Name;
+                    user.Email = model.User.Email;
+                    user.CreatedDate = model.User.CreatedDate;
+
+                    if((await _userManager.IsInRoleAsync(user,model.RoleName)) == false)
+                    {
+                        var roles = await _userManager.GetRolesAsync(user);
+                        await _userManager.RemoveFromRolesAsync(user, roles.ToArray());
+                        await _userManager.AddToRoleAsync(user, model.RoleName);
+                    }
+
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!UserExists(user.Id))
+                    if (!UserExists(model.User.Id))
                     {
                         return NotFound();
                     }
@@ -106,7 +130,7 @@ namespace Web.Controllers
                 return RedirectToAction(nameof(Index));
             }
             
-            return View(user);
+            return View(model);
         }
 
         // GET: Restaurants/Delete/5
