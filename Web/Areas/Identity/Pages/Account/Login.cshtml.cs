@@ -86,9 +86,20 @@ namespace Web.Areas.Identity.Pages.Account
                 var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: true);
                 if (result.Succeeded)
                 {
-                    _logger.LogInformation("User logged in.");
-                    //return LocalRedirect(returnUrl);
-                    return LocalRedirect("/Restaurants");
+                    var user = await _userManager.FindByEmailAsync(Input.Email);
+                    var roles = await _userManager.GetRolesAsync(user);
+
+                    if (roles.Contains("Admin") || roles.Contains("Owner"))
+                    {
+                        _logger.LogInformation("User logged in.");
+                        //return LocalRedirect(returnUrl);
+                        return LocalRedirect("/Restaurants");
+                    }
+                    else
+                    {
+                        ModelState.AddModelError(string.Empty, "Sorry, Web Site is only for Admin & Owners.");
+                        return Page();
+                    }
                 }
                 if (result.RequiresTwoFactor)
                 {

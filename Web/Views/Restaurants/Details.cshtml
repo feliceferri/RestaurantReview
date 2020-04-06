@@ -35,13 +35,12 @@
                 @Html.DisplayFor(model => model.Restaurant.PhoneNumber)
             </dd>
            
-            <dt class="col-sm-2">
+            @*<dt class="col-sm-2">
                 @Html.DisplayNameFor(model => model.Restaurant.ImageNameWithExtension)
             </dt>
             <dd class="col-sm-10">
-                @*@Html.DisplayFor(model => model.ImageNameWithExtension)*@
                 <img src=".\Images\Restaurants\@Model.Restaurant.ImageNameWithExtension" style="max-height:50px" />
-            </dd>
+            </dd>*@
             <dt class="col-sm-2">
                 @Html.DisplayNameFor(model => model.Restaurant.Created)
             </dt>
@@ -114,11 +113,22 @@
                             @*<td>
                                 @Html.DisplayFor(modelItem => item.CreatedBy.Id)
                             </td>*@
-                            <td>
-                                <a asp-controller="Reviews" asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                                @*<a asp-action="Details" asp-route-id="@item.Id">Details</a> |*@
-                                <a asp-controller="Reviews" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                            </td>
+                        <td>
+                            @if (User.IsInRole("Admin"))
+                            {
+                                <a  asp-controller="Reviews" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                            }
+                            else
+                            {
+                                <a  asp-controller="Reviews" asp-action="Edit" asp-route-id="@item.Id">Reply</a>
+                            }
+                            @if (User.IsInRole("Admin"))
+                            {
+                                @:|
+                                <a asp-controller="Reviews" asp-action="Delete" asp-route-id="@item.Id"> Delete </a>
+                            }
+                            
+                        </td>
                         </tr>
                     }
                 </tbody>

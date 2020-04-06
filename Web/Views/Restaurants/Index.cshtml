@@ -1,4 +1,5 @@
-﻿@model IEnumerable<Shared.DBModels.Restaurant>
+﻿@inject Microsoft.AspNetCore.Identity.UserManager<Shared.DBModels.ApplicationUser> _userManager;
+@model IEnumerable<Shared.DBModels.Restaurant>
 
 @{
     ViewData["Title"] = "Index";
