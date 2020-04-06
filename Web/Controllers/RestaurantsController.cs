@@ -30,20 +30,28 @@ namespace Web.Controllers
 
         // GET: Restaurants
         
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string UserId)
         {
-            
-            var restaurants = _context.Restaurants.Select(x => x);
-            if(User.IsInRole("Owner"))
+            IQueryable<Restaurant> restaurants = null;
+
+            if (string.IsNullOrWhiteSpace(UserId) == false)
             {
-                var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-                restaurants = from p in restaurants 
-                              where p.CreatedById == userId
-                              select p;
+                restaurants = _context.Restaurants.Where(x=> x.CreatedById == UserId).Select(x => x);
             }
-            if (User.IsInRole("Regular"))
+            else
             {
-                return View(new List<Restaurant>()); //Empty Result
+                restaurants = _context.Restaurants.Select(x => x);
+                if (User.IsInRole("Owner"))
+                {
+                    var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+                    restaurants = from p in restaurants
+                                  where p.CreatedById == userId
+                                  select p;
+                }
+                if (User.IsInRole("Regular"))
+                {
+                    return View(new List<Restaurant>()); //Empty Result
+                }
             }
 
             return View(await restaurants.Include(r => r.CreatedBy).ToListAsync());

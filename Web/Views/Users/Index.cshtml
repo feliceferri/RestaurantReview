@@ -38,7 +38,7 @@
     <tbody>
         @foreach (var item in Model)
         {
-        <tr>
+        <tr style="cursor: pointer;" onclick="location.href='/Restaurants/Index?UserId=@item.Id'">
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
