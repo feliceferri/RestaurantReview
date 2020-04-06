@@ -60,7 +60,48 @@ namespace Web.Controllers
         }
 
 
+        // GET: Restaurants/Create
+        public IActionResult Create()
+        {
+            return View(new ApplicationUser_CreateUser());
+        }
 
+        // POST: Restaurants/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create(Web.ViewModels.ApplicationUser_CreateUser model)
+        {
+            if (ModelState.IsValid)
+            {
+
+                try
+                {
+                    ApplicationUser user = new ApplicationUser();
+                    user.UserName = model.User.Email;
+                    user.Email = model.User.Email;
+                    user.Name = model.User.Name;
+                    user.CreatedDate = DateTime.Now;
+                    
+
+                    IdentityResult result = _userManager.CreateAsync(user, model.Password).Result;
+
+                    if (result.Succeeded)
+                    {
+                        _userManager.AddToRoleAsync(user, model.RoleName).Wait();
+                    }
+
+                    return RedirectToAction(nameof(Index));
+                }
+                catch(Exception ex)
+                {
+                    ModelState.AddModelError("Error", ex.Message);
+                }
+            }
+            
+            return View();
+        }
         public async Task<ActionResult<ApplicationUserWithSingleRole>> Edit(string id)
         {
             if (id == null)
