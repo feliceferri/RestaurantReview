@@ -108,7 +108,20 @@ namespace Web.Controllers
             {
                 try
                 {
-                    _context.Update(review);
+                    //_context.Update(review);
+
+                    var row = await _context.Reviews.Where(x => x.Id == review.Id).FirstOrDefaultAsync();
+                    if(row == null)
+                    {
+                        return NotFound();
+                    }
+
+                    row.Rating = review.Rating;
+                    row.ReplyByTheOwner = review.ReplyByTheOwner;
+                    row.VisitDate = review.VisitDate;
+                    row.Comment = review.Comment;
+                    row.Created = review.Created;
+
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)

@@ -10,67 +10,85 @@
 <div class="row">
     <div class="col-md-4">
 
-        @{
-            string readonlyAttributeForOwners = "";
+     
+        <form asp-action="Edit">
+
+            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="LastUpdateById" />
+            <input type="hidden" asp-for="Created" />
+            <input type="hidden" asp-for="CreatedById" />
+            <input type="hidden" asp-for="Deleted" />
+            <input type="hidden" asp-for="DeletedById" />
+            <input type="hidden" asp-for="RestaurantId" />
+
+            <div class="form-group">
+                <label asp-for="Restaurant.Name" class="control-label"></label>
+                @*<select asp-for="RestaurantId" class="form-control" asp-items="ViewBag.RestaurantId"></select>*@
+                <input asp-for="Restaurant.Name" class="form-control" readonly="readonly" />
+                <span asp-validation-for="Restaurant.Name" class="text-danger"></span>
+            </div>
+
             @if (User.IsInRole("Owner"))
             {
-                readonlyAttributeForOwners = "readonly";
-            }
-        }
-            <form asp-action="Edit">
-
-                <input type="hidden" asp-for="Id" />
-                <input type="hidden" asp-for="LastUpdateById" />
-                <input type="hidden" asp-for="Created" />
-                <input type="hidden" asp-for="CreatedById" />
-                <input type="hidden" asp-for="Deleted" />
-                <input type="hidden" asp-for="DeletedById" />
-                <input type="hidden" asp-for="RestaurantId" />
-
-                <div class="form-group">
-                    <label asp-for="RestaurantId" class="control-label"></label>
-                    @*<select asp-for="RestaurantId" class="form-control" asp-items="ViewBag.RestaurantId"></select>*@
-                    <input asp-for="Restaurant.Name" class="form-control" readonly="readonly" />
-                    <span asp-validation-for="Restaurant.Name" class="text-danger"></span>
-                </div>
-
                 <div class="form-group">
                     <label asp-for="Created" class="control-label"></label>
-                    <input asp-for="Created" class="form-control" readonly="@readonlyAttributeForOwners" />
+                    <input asp-for="Created" class="form-control" readonly="readonly" />
                     <span asp-validation-for="Created" class="text-danger"></span>
                 </div>
-                @*<div class="form-group">
-                    <label asp-for="CreatedById" class="control-label"></label>
-                    <select asp-for="CreatedById" class="form-control" asp-items="ViewBag.CreatedById"></select>
-                    <span asp-validation-for="CreatedById" class="text-danger"></span>
-                </div>*@
+
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="form-group">
                     <label asp-for="Rating" class="control-label"></label>
-                    <input asp-for="Rating" class="form-control" readonly="@readonlyAttributeForOwners" />
+                    <input asp-for="Rating" class="form-control" readonly="readonly" />
                     <span asp-validation-for="Rating" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label asp-for="VisitDate" class="control-label"></label>
-                    <input asp-for="VisitDate" class="form-control" readonly="@readonlyAttributeForOwners" />
+                    <input asp-for="VisitDate" class="form-control" readonly="readonly" />
                     <span asp-validation-for="VisitDate" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label asp-for="Comment" class="control-label"></label>
-                    <textarea asp-for="Comment" class="form-control" readonly="@readonlyAttributeForOwners"></textarea>
+                    <textarea asp-for="Comment" class="form-control" readonly="readonly"></textarea>
                     <span asp-validation-for="Comment" class="text-danger"></span>
                 </div>
+            }
+            else
+            {
                 <div class="form-group">
-                    <label asp-for="ReplyByTheOwner" class="control-label"></label>
-                    <textarea asp-for="ReplyByTheOwner" class="form-control"></textarea>
-                    <span asp-validation-for="ReplyByTheOwner" class="text-danger"></span>
+                    <label asp-for="Created" class="control-label"></label>
+                    <input asp-for="Created" class="form-control"  />
+                    <span asp-validation-for="Created" class="text-danger"></span>
                 </div>
 
-
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="form-group">
-                    <input type="submit" value="Save" class="btn btn-primary" />
+                    <label asp-for="Rating" class="control-label"></label>
+                    <input asp-for="Rating" class="form-control"  />
+                    <span asp-validation-for="Rating" class="text-danger"></span>
                 </div>
-            </form>
+                <div class="form-group">
+                    <label asp-for="VisitDate" class="control-label"></label>
+                    <input asp-for="VisitDate" class="form-control"  />
+                    <span asp-validation-for="VisitDate" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Comment" class="control-label"></label>
+                    <textarea asp-for="Comment" class="form-control"></textarea>
+                    <span asp-validation-for="Comment" class="text-danger"></span>
+                </div>
+            }
+            <div class="form-group">
+                <label asp-for="ReplyByTheOwner" class="control-label"></label>
+                <textarea asp-for="ReplyByTheOwner" class="form-control"></textarea>
+                <span asp-validation-for="ReplyByTheOwner" class="text-danger"></span>
+            </div>
+
+
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
         </div>
 </div>
 
