@@ -32,16 +32,10 @@ namespace Mobile.Views
 
         private async void CollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
-            //if(e.CurrentSelection?[0] == null)
-            //{
-            //    return;
-            //}
-
+                       
             try
             {
                 GlobalVariables.SelectedRestaurantId = (e.CurrentSelection[0] as Shared.DBModels.Restaurant).Id;
-                //this.ListRestaurants.SelectedItem = null;
                 ((CollectionView)sender).SelectedItem = null;
                 await GlobalVariables.NavigateToAsync("Restaurant");
              }
