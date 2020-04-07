@@ -25,7 +25,7 @@
                                     Grid.Column="1"
                                     Margin="0,40,0,10"
                                     Padding="0"
-                                    BackgroundColor="Red"
+                                    BackgroundColor="Gray"
                                     CornerRadius="20"
                                     HasShadow="True"
                                     IsClippedToBounds="True">

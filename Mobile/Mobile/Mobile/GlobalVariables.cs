@@ -20,7 +20,10 @@ namespace Mobile
         //  127.0.0.1	    192.168.1.1	    10.0.2.2	        192.168.1.1
 
         //internal static string BaseURLWS = "https://10.0.2.2:5001/";
-        internal static string BaseURLWS = "http://10.0.2.2:5000/";
+        //THIS ONE IN DEV internal static string BaseURLWS = "http://10.0.2.2:5000/";
+
+        internal static string BaseURLWS = "https://restaurants2020.azurewebsites.net/";
+        
 
 
 

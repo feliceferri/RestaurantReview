@@ -13,9 +13,11 @@ using Shared.DBModels;
 using Microsoft.EntityFrameworkCore;
 using Shared;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Web.Controllers.API
 {
+    [AllowAnonymous]
     [Route("api/[controller]")]
     [ApiController]
     public class RestaurantsController : ControllerBase
@@ -201,9 +203,12 @@ namespace Web.Controllers.API
                         Reviews.Add(LastReview);
                     }
 
-                    res.Rating = await (from p in _ApplicationDbContext.Reviews
-                                        where p.RestaurantId == RestaurantId
-                                        select p).AverageAsync(x => x.Rating);
+                    if (Reviews != null && Reviews.Count > 0)  //If there are no reviews it will throw an error
+                    {
+                        res.Rating = await (from p in _ApplicationDbContext.Reviews
+                                            where p.RestaurantId == RestaurantId
+                                            select p)?.AverageAsync(x => x.Rating);
+                    }
 
                     res.Reviews = Reviews;
                 }
@@ -240,11 +245,12 @@ namespace Web.Controllers.API
                                          orderby p.Created descending
                                          select p).ToListAsync();
 
-                    
-                    res.Rating = await (from p in _ApplicationDbContext.Reviews
-                                        where p.RestaurantId == RestaurantId
-                                        select p).AverageAsync(x => x.Rating);
-
+                    if (res.Reviews != null && res.Reviews.Count > 0)  //If there are no reviews it will throw an error
+                    {
+                        res.Rating = await (from p in _ApplicationDbContext.Reviews
+                                            where p.RestaurantId == RestaurantId
+                                            select p).AverageAsync(x => x.Rating);
+                    }
 
                     if(res.Reviews != null)
                     {

@@ -81,7 +81,7 @@
                         SelectionMode="Single">
                         <CollectionView.ItemTemplate>
                             <DataTemplate>
-                                <Grid >
+                                <Grid Margin="0,0,0,10">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="*"></ColumnDefinition>
                                         <ColumnDefinition Width="3*"></ColumnDefinition>
@@ -90,21 +90,23 @@
                                     <StackLayout >
 
                                         <Frame CornerRadius="5" IsClippedToBounds="True" Margin="5,5,5,7" BackgroundColor="White" 
-                                               Padding="0" VerticalOptions="FillAndExpand">
+                                               Padding="0" VerticalOptions="Start">
 
-                                                <Image HeightRequest="40" VerticalOptions="FillAndExpand">
+                                                <Image HeightRequest="80" VerticalOptions="FillAndExpand">
                                             </Image>
-                                            </Frame>
-                                        
-                                    </StackLayout>
-                                    
-                                    <custom:RatingBar  VerticalOptions="EndAndExpand" 
+                                        </Frame>
+
+                                        <custom:RatingBar  Margin="0,-20,0,0"
                                                 IsReadOnly="True"
                                                 HeightRequest="15"
                                                 Rating="{Binding Rating}" />
+                                        
+                                    </StackLayout>
+                                    
+                                    
                                 
 
-                                <StackLayout Grid.Column="1" VerticalOptions="CenterAndExpand">
+                                <StackLayout Grid.Column="1" VerticalOptions="StartAndExpand">
                                         <Label Text="{Binding Name}" TextColor="White" FontAttributes="Bold" FontSize="Large"></Label>
                                         <Label Text="{Binding Description}" TextColor="White"></Label>
                                      </StackLayout>

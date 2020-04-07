@@ -13,9 +13,11 @@ using Shared.DBModels;
 using Microsoft.EntityFrameworkCore;
 using Shared;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Web.Controllers.API
 {
+    [AllowAnonymous]
     [Route("api/[controller]")]
     [ApiController]
     public class ReviewsController : ControllerBase

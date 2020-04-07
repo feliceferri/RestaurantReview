@@ -37,7 +37,9 @@ namespace Shared.DBModels
             {
                 if (ImageNameWithExtension != null)
                 {
-                    return "https://localhost:44357/" + "Images/Restaurants/" + ImageNameWithExtension;
+                    //return "https://localhost:44357/" + "Images/Restaurants/" + ImageNameWithExtension;
+                    return "https://restaurants2020.azurewebsites.net/" + "Images/Restaurants/" + ImageNameWithExtension;
+                
                 }
                 else
                 {
