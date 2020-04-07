@@ -92,7 +92,7 @@
                                         <Frame CornerRadius="5" IsClippedToBounds="True" Margin="5,5,5,7" BackgroundColor="White" 
                                                Padding="0" VerticalOptions="Start">
 
-                                                <Image HeightRequest="80" VerticalOptions="FillAndExpand">
+                                            <Image HeightRequest="80"  Source="{Binding ImageFullURL}" VerticalOptions="FillAndExpand">
                                             </Image>
                                         </Frame>
 

@@ -19,9 +19,15 @@
                 <Frame BackgroundColor="White" CornerRadius="40" Margin="0,-40,0,0">
                       
                     <StackLayout >
-                                                              
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                <ColumnDefinition Width="3*"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+
                                 <Frame 
-                                    Grid.Row="0"
                                     Grid.Column="1"
                                     Margin="0,40,0,10"
                                     Padding="0"
@@ -30,7 +36,8 @@
                                     HasShadow="True"
                                     IsClippedToBounds="True">
                                     <Grid>
-                                        <Image
+                                            
+                                        <Image 
                                        Aspect="AspectFill"
                                         HeightRequest="135"
                                         HorizontalOptions="FillAndExpand"
@@ -38,17 +45,17 @@
                                         VerticalOptions="FillAndExpand" />
 
                                         
-                                    <custom:RatingBar BackgroundColor="White" Opacity="0.8" VerticalOptions="EndAndExpand" Padding="4"
+                                    <custom:RatingBar  BackgroundColor="White" Opacity="0.8" VerticalOptions="EndAndExpand" Padding="4" 
                                         IsReadOnly="True"
                                         HeightRequest="27"
                                         Rating="{Binding Restaurant.Rating}" />
                                     </Grid>
                                </Frame>
+                        </Grid>
 
 
-                               
 
-                                <Label
+                        <Label
                                     Grid.Row="1"
                                     Grid.Column="0"
                                     Grid.ColumnSpan="4"

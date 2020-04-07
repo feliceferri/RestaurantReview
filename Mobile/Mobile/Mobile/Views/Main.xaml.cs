@@ -18,6 +18,14 @@ namespace Mobile.Views
         {
             InitializeComponent();
 
+           
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+
+
             viewModel = new MainViewModel();
             BindingContext = viewModel;
         }

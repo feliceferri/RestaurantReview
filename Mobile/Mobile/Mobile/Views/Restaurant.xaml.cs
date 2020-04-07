@@ -18,6 +18,13 @@ namespace Mobile.Views
         {
             InitializeComponent();
 
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+
+
             if (GlobalVariables.SelectedRestaurantId == null)
             {
                 Task.Run(async () =>
