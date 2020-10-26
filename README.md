@@ -35,7 +35,7 @@ If it’s a web application, it must be a single-page application. All actions n
 Functional UI/UX design is needed. You are not required to create a unique design, however, do follow best practices to make the project as functional as possible.
 
 
-# Video - Functionality baded on requirements
+# Video - Functionality based on requirements
 
 [![Functionality baded on requirements](https://img.youtube.com/vi/C0ZrcUjkF-k/0.jpg)](http://www.youtube.com/watch?v=C0ZrcUjkF-k)
 
