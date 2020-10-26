@@ -1,4 +1,4 @@
-# This was a project done for an Interview.
+# Project done for an Interview.
 
 Its a Restaurant Review App (Full Stack Solution)
 - Includes SQL Server Backend  (EF Core, Model First, POCO, Identity)
@@ -6,7 +6,6 @@ Its a Restaurant Review App (Full Stack Solution)
 - Includes Web Management Site (Asp.Net Core, Razor Pages)
 - Includes Xamarin IOS & Android frontend
 
-# Short Videos on how it works, and code walkthrough at the bottom.
 
 # These were the asked requirements:
 
@@ -36,8 +35,10 @@ If it’s a web application, it must be a single-page application. All actions n
 Functional UI/UX design is needed. You are not required to create a unique design, however, do follow best practices to make the project as functional as possible.
 
 
-# Videos
+# Video - Functionality baded on requirements
 
 [![Functionality baded on requirements](https://img.youtube.com/vi/C0ZrcUjkF-k/0.jpg)](http://www.youtube.com/watch?v=C0ZrcUjkF-k)
+
+# Video - Going through the code
 
 [![Toptal Technical Video (Going through the code)](https://img.youtube.com/vi/O9bznjWsttY/0.jpg)](http://www.youtube.com/watch?v=O9bznjWsttY)
